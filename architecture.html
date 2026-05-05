@@ -215,8 +215,24 @@
     <line x1="427" y1="78" x2="330" y2="170" stroke="#E85D04" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arr-orange)"/>
 
     <!-- Arrow Delivery → consolidate -->
-    <line x1="682" y1="78" x2="430" y2="170" stroke="#2DC653" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arr-green)"/>
-    <text x="590" y="130" fill="#2DC653" font-size="10" text-anchor="middle">join: delno→dlref  /  accno→curef</text>
+    <line x1="682" y1="78" x2="500" y2="173" stroke="#2DC653" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arr-green)"/>
+    <text x="610" y="100" fill="#2DC653" font-size="9" text-anchor="middle">delno→dlref / accno→curef</text>
+
+    <!-- Product Categories -->
+    <rect x="580" y="105" width="205" height="44" rx="8" fill="#2D2D44" stroke="#2DC653" stroke-width="1.5"/>
+    <text x="682" y="122" fill="#2DC653" font-size="9" font-weight="700" text-anchor="middle" letter-spacing="0.5">ENRICHMENT SOURCE</text>
+    <text x="682" y="138" fill="white" font-size="11" font-weight="600" text-anchor="middle">Product Categories.xlsx</text>
+    <text x="682" y="149" fill="#9090A8" font-size="9" text-anchor="middle">1,200 products · category_l1/l2 · brand_family</text>
+    <line x1="580" y1="127" x2="495" y2="190" stroke="#2DC653" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arr-green)"/>
+    <text x="530" y="163" fill="#2DC653" font-size="9" text-anchor="middle">category join</text>
+
+    <!-- Rock Bottom Prices -->
+    <rect x="580" y="155" width="205" height="44" rx="8" fill="#2D2D44" stroke="#2DC653" stroke-width="1.5"/>
+    <text x="682" y="172" fill="#2DC653" font-size="9" font-weight="700" text-anchor="middle" letter-spacing="0.5">ENRICHMENT SOURCE</text>
+    <text x="682" y="188" fill="white" font-size="11" font-weight="600" text-anchor="middle">Rock_Bottom_Prices.xlsx</text>
+    <text x="682" y="199" fill="#9090A8" font-size="9" text-anchor="middle">728 products · Pre April / Post April prices</text>
+    <line x1="580" y1="177" x2="495" y2="202" stroke="#2DC653" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arr-green)"/>
+    <text x="530" y="195" fill="#2DC653" font-size="9" text-anchor="middle">RB join (2026)</text>
 
     <!-- ── ROW 2: consolidate_sales.py ── -->
     <rect x="165" y="173" width="330" height="58" rx="8" fill="#2D2D44" stroke="#F4A261" stroke-width="1.5"/>
@@ -231,13 +247,13 @@
     <rect x="165" y="283" width="330" height="58" rx="8" fill="#2D2D44" stroke="#9B59B6" stroke-width="1.5"/>
     <text x="330" y="302" fill="#C39BD3" font-size="9" font-weight="700" text-anchor="middle" letter-spacing="0.5">CONSOLIDATED DATASET</text>
     <text x="330" y="319" fill="white" font-size="13" font-weight="600" text-anchor="middle">Sales_Invoices_All.parquet</text>
-    <text x="330" y="334" fill="#9090A8" font-size="10" text-anchor="middle">185,409 rows · 22 cols · 2.8 MB · Mar 2024 – present</text>
+    <text x="330" y="334" fill="#9090A8" font-size="10" text-anchor="middle">185,409 rows · 29 cols · 3.2 MB · Mar 2024 – present</text>
 
     <!-- query_sales.py (right side helper) -->
     <rect x="540" y="283" width="190" height="58" rx="8" fill="#2D2D44" stroke="#F4A261" stroke-width="1"/>
     <text x="635" y="302" fill="#F4A261" font-size="9" font-weight="700" text-anchor="middle" letter-spacing="0.5">QUERY HELPER</text>
     <text x="635" y="319" fill="white" font-size="12" font-weight="600" text-anchor="middle">query_sales.py</text>
-    <text x="635" y="334" fill="#9090A8" font-size="10" text-anchor="middle">load · by_rep · by_month · by_account</text>
+    <text x="635" y="334" fill="#9090A8" font-size="10" text-anchor="middle">load · by_rep · by_category · rb_analysis</text>
 
     <!-- Arrow query_sales → parquet -->
     <line x1="540" y1="312" x2="495" y2="312" stroke="#F4A261" stroke-width="1.5" marker-end="url(#arr-gold)"/>
@@ -258,7 +274,7 @@
     <rect x="165" y="483" width="220" height="58" rx="8" fill="#2D2D44" stroke="#E85D04" stroke-width="2"/>
     <text x="275" y="502" fill="#E85D04" font-size="9" font-weight="700" text-anchor="middle" letter-spacing="0.5">OUTPUT</text>
     <text x="275" y="519" fill="white" font-size="12" font-weight="600" text-anchor="middle">Sales Dashboard/index.html</text>
-    <text x="275" y="534" fill="#9090A8" font-size="10" text-anchor="middle">57 KB · standalone · 4 tabs · no server</text>
+    <text x="275" y="534" fill="#9090A8" font-size="10" text-anchor="middle">89 KB · standalone · 5 tabs · no server</text>
 
     <!-- Arrow → GitHub Pages -->
     <line x1="385" y1="512" x2="455" y2="512" stroke="#E85D04" stroke-width="2" marker-end="url(#arr-orange)"/>
@@ -323,6 +339,31 @@
     </div>
   </div>
 
+  <div class="card enrich">
+    <div class="card-label">Enrichment Source</div>
+    <div class="card-title">Product Categories_05052026.xlsx</div>
+    <div class="card-meta">
+      <strong>Location:</strong> Manual/<br>
+      <strong>Sheet:</strong> Sheet1 (2) &nbsp;·&nbsp; <strong>Rows:</strong> 1,200<br>
+      <strong>Provides:</strong> category_l1 (11 values), category_l2 (14 values), brand_family<br>
+      <strong>Join:</strong> prodno → Product Code (98.8% coverage on FY2026)<br>
+      <strong>Applied to:</strong> all rows in parquet
+    </div>
+  </div>
+
+  <div class="card enrich">
+    <div class="card-label">Enrichment Source</div>
+    <div class="card-title">Rock_Bottom_Prices_Populated.xlsx</div>
+    <div class="card-meta">
+      <strong>Location:</strong> Manual/<br>
+      <strong>Primary sheet:</strong> sheet1 — 728 products with Pre April + Post April prices<br>
+      <strong>Fallback sheet:</strong> Sheet1 (2) — 1,200 products, single Price column<br>
+      <strong>Join:</strong> prodno → Product Code<br>
+      <strong>Applied to:</strong> 2026 calendar year INVOICE rows only (98.7% coverage)<br>
+      <strong>Period rule:</strong> month ≤ 3 → Pre April price; month ≥ 4 → Post April price
+    </div>
+  </div>
+
   <div class="card script">
     <div class="card-label">Processing Script</div>
     <div class="card-title">consolidate_sales.py</div>
@@ -351,7 +392,9 @@
       <strong>Rows:</strong> 185,409 &nbsp;·&nbsp; <strong>Size:</strong> 2.8 MB compressed<br>
       <strong>Period:</strong> Mar 2024 – present<br>
       <strong>Key cols:</strong> tranno, ivtype, trandate, delno, accno, smno, prodno, prodname, ivqty, invprice, ivcost, ivnett, ivvat, year, month, fy, fy_label, store_name, smref, arref, store_status<br>
-      <strong>delno filled:</strong> 82.8% &nbsp;·&nbsp; <strong>store_name:</strong> 90.6%
+      <strong>Category cols:</strong> category_l1, category_l2, brand_family (from Product Categories file; 98.8% filled)<br>
+      <strong>RB cols:</strong> rb_price, rb_status — "Above RB" / "Below RB" (2026 INVOICE rows only; 98.7% covered)<br>
+      <strong>delno filled:</strong> 82.8% &nbsp;·&nbsp; <strong>store_name:</strong> 90.6% &nbsp;·&nbsp; <strong>Total cols:</strong> 29
     </div>
   </div>
 
@@ -372,7 +415,7 @@
     <div class="card-meta">
       <strong>Size:</strong> ~57 KB · fully standalone HTML<br>
       <strong>Charts:</strong> Chart.js 4.4.0 (CDN)<br>
-      <strong>Tabs:</strong> 4 (YOY · FY2025 · FY2026 YTD · Monthly)<br>
+      <strong>Tabs:</strong> 5 (YOY · FY2025 · FY2026 YTD · Monthly · Products)<br>
       <strong>Data:</strong> Embedded as <code>const DATA = {...}</code><br>
       <strong>No server required</strong> — open in any browser
     </div>
@@ -412,7 +455,9 @@
       <li>Month-by-month actual vs target</li>
       <li>Rep performance table with targets</li>
       <li>Top 15 accounts YTD</li>
-      <li>Partial-month ⚡ indicator</li>
+      <li>Rock bottom compliance: above/below RB by rep and category</li>
+      <li>Products most frequently sold below RB</li>
+      <li>Products without RB price set</li>
     </ul>
   </div>
   <div class="tab-card">
@@ -424,6 +469,16 @@
       <li>3-way rep comparison: 2024 / 2025 / 2026</li>
       <li>Growth vs target (30% rule) per rep</li>
       <li>12-month trend sparkline chart</li>
+    </ul>
+  </div>
+  <div class="tab-card">
+    <div class="tab-num">Tab 5</div>
+    <div class="tab-name">Products</div>
+    <ul class="tab-items">
+      <li>Revenue split by Category_L1 (donut chart) — FY2026 YTD</li>
+      <li>Revenue by category (horizontal bar chart)</li>
+      <li>Top 20 products by net revenue with category</li>
+      <li>11 top-level categories: Enamel, PVA Paints, QD Enamel, Woodcare, Accessories, Waterproofing, Floor &amp; Roof Paints, Primers, Putty, General, Specialised Coatings</li>
     </ul>
   </div>
 </div>
@@ -483,6 +538,15 @@
     <div class="rule-text">
       <strong>Revenue = Net of Credits</strong> — all figures are INVOICE ivnett minus CRNOTE ivnett.
       <span>Credit notes are subtracted at the rep, account, and company level. Gross invoices and credit totals are shown separately on FY detail tabs.</span>
+    </div>
+  </div>
+  <div class="rule">
+    <div class="rule-dot"></div>
+    <div class="rule-text">
+      <strong>Rock Bottom Prices — 2026 Only</strong>
+      <span>RB comparison applies only to calendar-year 2026 INVOICE rows. Period selection: <code>month ≤ 3 → Pre April price</code>; <code>month ≥ 4 → Post April price</code> (price increase in April 2026).<br>
+      Coverage: 98.7% of FY2026 invoice lines have an RB price. Products without RB are disclosed separately.<br>
+      Compliance: <span class="pill green">Above RB</span> = invprice ≥ rb_price &nbsp; <span class="pill red">Below RB</span> = invprice &lt; rb_price</span>
     </div>
   </div>
 </div>
