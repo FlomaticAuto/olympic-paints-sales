@@ -27,11 +27,8 @@
     padding:16px 40px;display:flex;align-items:center;justify-content:space-between;
     border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100}
   .hdr-l{display:flex;align-items:center;gap:14px}
-  .logo{width:44px;height:44px;background:var(--yellow);border-radius:50%;
-    display:flex;align-items:center;justify-content:center;flex-direction:column;
-    line-height:1}
-  .logo-text{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:10px;
-    color:var(--black);letter-spacing:0;text-align:center;text-transform:uppercase}
+  .logo{width:44px;height:44px;border-radius:50%;overflow:hidden;flex-shrink:0}
+  .logo img{width:100%;height:100%;object-fit:cover;display:block}
   .hdr-title{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:20px;
     letter-spacing:0.5px;text-transform:uppercase;color:var(--text)}
   .hdr-sub{font-family:'Barlow',sans-serif;font-size:11px;font-weight:400;
@@ -139,7 +136,7 @@
 <!-- HEADER -->
 <div class="hdr">
   <div class="hdr-l">
-    <div class="logo"><span class="logo-text">OLY<br>MPC</span></div>
+    <div class="logo"><img src="logo.jpg" alt="Olympic Paints"></div>
     <div>
       <div class="hdr-title">Olympic Paints</div>
       <div class="hdr-sub">Sales Performance Dashboard — FY2024 · FY2025 · FY2026</div>
