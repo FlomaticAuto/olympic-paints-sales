@@ -2099,9 +2099,9 @@ function initYOYCharts() {
   new Chart(document.getElementById('cYOYLine'), {
     type:'line',
     data:{labels:months, datasets:[
-      {label:'2024', data:s24, borderColor:'rgba(148,147,144,0.4)', borderDash:[5,4], fill:false, tension:0.3, pointRadius:4, borderWidth:2},
-      {label:'2025', data:s25, borderColor:'rgba(148,147,144,0.8)', fill:false, tension:0.3, pointRadius:4, borderWidth:2},
-      {label:'2026', data:s26, borderColor:O, fill:false, tension:0.3, pointRadius:5, borderWidth:2.5},
+      {label:'2024', data:s24, borderColor:'rgba(148,147,144,0.4)', backgroundColor:'rgba(148,147,144,0.04)', borderDash:[5,4], fill:true, tension:0.3, pointRadius:4, borderWidth:2},
+      {label:'2025', data:s25, borderColor:'rgba(148,147,144,0.8)', backgroundColor:'rgba(148,147,144,0.10)', fill:true, tension:0.3, pointRadius:4, borderWidth:2},
+      {label:'2026', data:s26, borderColor:O, backgroundColor:'rgba(245,196,0,0.15)', fill:true, tension:0.3, pointRadius:5, borderWidth:2.5},
     ]},
     options:{responsive:true,maintainAspectRatio:false,
       plugins:{legend:{position:'bottom'},tooltip:{callbacks:{label:c=>'R'+(c.parsed.y*1e6/1e6).toFixed(2)+'M'}}},
