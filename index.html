@@ -2456,6 +2456,7 @@ function initActivityCharts() {
     data: { labels: repLabels, datasets: [{ data: DATA.reps.map(r => DATA.mtg_by_rep[r] || 0), backgroundColor: _actRepColors, borderRadius: 6 }] },
     options: {
       responsive: true, maintainAspectRatio: false,
+      layout: { padding: { top: 24 } },
       plugins: { legend: { display: false } },
       scales: { x: { grid: GRID }, y: { grid: GRID } }
     }
@@ -2465,6 +2466,7 @@ function initActivityCharts() {
     data: { labels: repLabels, datasets: [{ data: DATA.reps.map(r => DATA.leads_by_rep[r] || 0), backgroundColor: _actRepColors, borderRadius: 6 }] },
     options: {
       responsive: true, maintainAspectRatio: false,
+      layout: { padding: { top: 24 } },
       plugins: { legend: { display: false } },
       scales: { x: { grid: GRID }, y: { grid: GRID } }
     }
