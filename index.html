@@ -2096,12 +2096,20 @@ function initYOYCharts() {
   const g25 = [null,null,3.0,17.5,-13.2,2.1,16.6,-0.2,15.2,32.4,4.3,7.3];
   const g26 = [-5.8,27.3,6.2,25.5,-92.9,-100.0,-100.0,-100.0,-100.0,-100.0,-100.0,-100.0];
 
-  new Chart(document.getElementById('cYOYLine'), {
+  const yoyCv = document.getElementById('cYOYLine');
+  const yoyCtx = yoyCv.getContext('2d');
+  function yoyGrad(r, g, b, topA) {
+    const gr = yoyCtx.createLinearGradient(0, 0, 0, 300);
+    gr.addColorStop(0,   `rgba(${r},${g},${b},${topA})`);
+    gr.addColorStop(1,   `rgba(${r},${g},${b},0)`);
+    return gr;
+  }
+  new Chart(yoyCv, {
     type:'line',
     data:{labels:months, datasets:[
-      {label:'2024', data:s24, borderColor:'rgba(148,147,144,0.4)', backgroundColor:'rgba(148,147,144,0.04)', borderDash:[5,4], fill:true, tension:0.3, pointRadius:4, borderWidth:2},
-      {label:'2025', data:s25, borderColor:'rgba(148,147,144,0.8)', backgroundColor:'rgba(148,147,144,0.10)', fill:true, tension:0.3, pointRadius:4, borderWidth:2},
-      {label:'2026', data:s26, borderColor:O, backgroundColor:'rgba(245,196,0,0.15)', fill:true, tension:0.3, pointRadius:5, borderWidth:2.5},
+      {label:'2024', data:s24, borderColor:'rgba(148,147,144,0.4)', backgroundColor:yoyGrad(148,147,144,0.12), borderDash:[5,4], fill:true, tension:0.3, pointRadius:4, borderWidth:2},
+      {label:'2025', data:s25, borderColor:'rgba(148,147,144,0.8)', backgroundColor:yoyGrad(148,147,144,0.25), fill:true, tension:0.3, pointRadius:4, borderWidth:2},
+      {label:'2026', data:s26, borderColor:O, backgroundColor:yoyGrad(245,196,0,0.5), fill:true, tension:0.3, pointRadius:5, borderWidth:2.5},
     ]},
     options:{responsive:true,maintainAspectRatio:false,
       plugins:{legend:{position:'bottom'},tooltip:{callbacks:{label:c=>'R'+(c.parsed.y*1e6/1e6).toFixed(2)+'M'}}},
