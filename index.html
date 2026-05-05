@@ -1,1 +1,1105 @@
-placeholder
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Olympic Paints — Sales Dashboard</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+  :root {
+    --orange:#E85D04;--dark:#1A1A2E;--mid:#2D2D44;--light:#F5F5F0;
+    --gold:#F4A261;--teal:#2EC4B6;--red:#E63946;--green:#2DC653;
+    --amber:#F4A261;--card:#FFFFFF;--border:#E8E8E0;--muted:#6B7280;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--light);color:var(--dark)}
+
+  /* Header */
+  .hdr{background:linear-gradient(135deg,var(--dark),var(--mid));color:#fff;
+    padding:20px 40px;display:flex;align-items:center;justify-content:space-between;
+    box-shadow:0 4px 20px rgba(0,0,0,.3);position:sticky;top:0;z-index:100}
+  .hdr-l{display:flex;align-items:center;gap:16px}
+  .logo{width:48px;height:48px;background:var(--orange);border-radius:50%;
+    display:flex;align-items:center;justify-content:center;font-size:18px;
+    font-weight:900;color:#fff;box-shadow:0 0 0 3px rgba(232,93,4,.3)}
+  .hdr-title{font-size:19px;font-weight:700}
+  .hdr-sub{font-size:11px;color:rgba(255,255,255,.5);margin-top:2px}
+  .hdr-r{text-align:right}
+  .hdr-gen{font-size:11px;color:rgba(255,255,255,.4);margin-top:3px}
+
+  /* Tab bar */
+  .tab-bar{background:var(--dark);padding:0 40px;display:flex;gap:4px}
+  .tab-btn{background:transparent;border:none;color:rgba(255,255,255,.5);
+    padding:12px 20px;font-size:13px;font-weight:600;cursor:pointer;
+    border-bottom:3px solid transparent;transition:all .2s;white-space:nowrap}
+  .tab-btn:hover{color:#fff}
+  .tab-btn.active{color:var(--orange);border-bottom-color:var(--orange)}
+
+  /* Main */
+  .main{padding:28px 40px;max-width:1600px;margin:0 auto}
+  .tab-panel{display:none}.tab-panel.active{display:block}
+
+  /* Section title */
+  .stitle{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;
+    color:var(--orange);margin:32px 0 14px;display:flex;align-items:center;gap:10px}
+  .stitle::after{content:'';flex:1;height:1px;background:var(--border)}
+
+  /* KPI cards */
+  .kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px}
+  .kpi{background:var(--card);border-radius:12px;padding:18px 20px;
+    border:1px solid var(--border);box-shadow:0 2px 8px rgba(0,0,0,.05)}
+  .kpi-label{font-size:10px;font-weight:700;text-transform:uppercase;
+    letter-spacing:1px;color:var(--muted);margin-bottom:6px}
+  .kpi-value{font-size:24px;font-weight:800;line-height:1}
+  .kpi-delta{margin-top:6px;font-size:12px;font-weight:600}
+  .kpi-delta.up{color:var(--green)}.kpi-delta.dn{color:var(--red)}
+  .kpi-delta.warn{color:#c07000}.kpi-delta.neu{color:var(--muted)}
+  .kpi-bar{height:4px;background:var(--border);border-radius:2px;margin-top:8px}
+  .kpi-bar-fill{height:100%;border-radius:2px}
+
+  /* Cards / grid */
+  .g2{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+  .g3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .card{background:var(--card);border-radius:12px;padding:22px;
+    border:1px solid var(--border);box-shadow:0 2px 8px rgba(0,0,0,.05)}
+  .card.full{grid-column:1/-1}
+  .card-title{font-size:14px;font-weight:700;margin-bottom:3px}
+  .card-sub{font-size:11px;color:var(--muted)}
+  .chart-wrap{position:relative;margin-top:14px}
+  .h260{height:260px}.h300{height:300px}.h320{height:320px}.h360{height:360px}
+
+  /* Tables */
+  .tw{overflow-x:auto;margin-top:10px}
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  thead tr{background:var(--dark);color:#fff}
+  thead th{padding:9px 11px;text-align:left;font-size:10px;font-weight:600;
+    text-transform:uppercase;letter-spacing:.7px;white-space:nowrap}
+  tbody tr{border-bottom:1px solid var(--border)}
+  tbody tr:hover{background:rgba(232,93,4,.04)}
+  tbody td{padding:8px 11px;vertical-align:middle}
+  .num{text-align:right;font-variant-numeric:tabular-nums}
+
+  /* Pills */
+  .pill{display:inline-block;padding:2px 8px;border-radius:20px;
+    font-size:11px;font-weight:700;white-space:nowrap}
+  .pill.green{background:rgba(45,198,83,.12);color:#1a9e3f}
+  .pill.red{background:rgba(230,57,70,.12);color:#c0392b}
+  .pill.amber{background:rgba(244,162,97,.15);color:#c07000}
+  .pill.neutral{background:rgba(107,114,128,.1);color:var(--muted)}
+
+  /* Row colouring for monthly view */
+  .row-green{border-left:3px solid var(--green)}
+  .row-amber{border-left:3px solid var(--amber)}
+  .row-red{border-left:3px solid var(--red)}
+
+  /* Month nav */
+  .month-nav{display:flex;align-items:center;gap:12px;margin-bottom:20px;flex-wrap:wrap}
+  .month-nav .nav-btn{background:var(--dark);color:#fff;border:none;
+    padding:8px 16px;border-radius:8px;cursor:pointer;font-size:14px;font-weight:700}
+  .month-nav .nav-btn:hover{background:var(--orange)}
+  .month-nav .month-label{font-size:20px;font-weight:800;color:var(--dark);min-width:160px;text-align:center}
+  .month-nav select{padding:7px 12px;border-radius:8px;border:1px solid var(--border);
+    font-size:13px;background:var(--card);cursor:pointer}
+  .partial-badge{background:var(--gold);color:#7a4900;padding:3px 10px;
+    border-radius:12px;font-size:11px;font-weight:700}
+
+  footer{text-align:center;padding:24px 40px;font-size:11px;color:var(--muted);
+    border-top:1px solid var(--border);margin-top:36px;line-height:1.6}
+
+  @media(max-width:900px){
+    .main{padding:16px}.hdr,.tab-bar{padding:12px 16px}
+    .g2,.g3{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="hdr">
+  <div class="hdr-l">
+    <div class="logo">OP</div>
+    <div>
+      <div class="hdr-title">Olympic Paints</div>
+      <div class="hdr-sub">Sales Performance Dashboard — FY2024 · FY2025 · FY2026</div>
+    </div>
+  </div>
+  <div class="hdr-r">
+    <div class="hdr-gen">Generated 05 May 2026 11:29</div>
+  </div>
+</div>
+
+<!-- TAB BAR -->
+<div class="tab-bar">
+  <button class="tab-btn active" data-tab="yoy"     onclick="showTab('yoy')">YOY Overview</button>
+  <button class="tab-btn"        data-tab="fy2025"  onclick="showTab('fy2025')">FY2025 Full Year</button>
+  <button class="tab-btn"        data-tab="fy2026"  onclick="showTab('fy2026')">FY2026 YTD</button>
+  <button class="tab-btn"        data-tab="monthly" onclick="showTab('monthly')">Monthly View</button>
+</div>
+
+<div class="main">
+
+<!-- ═══════════════════════════════════════════════════════════ TAB 1: YOY -->
+<div id="panel-yoy" class="tab-panel active">
+
+  <div class="stitle">FY Totals — Net Revenue (Invoices minus Credit Notes)</div>
+  <div class="kpi-grid">
+    <div class="kpi">
+      <div class="kpi-label">FY2024 Net Revenue</div>
+      <div class="kpi-value">R130.16M</div>
+      <div class="kpi-bar"><div class="kpi-bar-fill" style="width:100%;background:var(--muted)"></div></div>
+      <div class="kpi-delta neu">Mar 2024 – Feb 2025 · Baseline</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">FY2025 Net Revenue</div>
+      <div class="kpi-value">R141.61M</div>
+      <div class="kpi-bar"><div class="kpi-bar-fill" style="width:84%;background:var(--amber)"></div></div>
+      <div class="kpi-delta warn">▲ +8.8% vs FY2024 · Target: R169.21M</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">FY2026 YTD (3 months)</div>
+      <div class="kpi-value">R23.25M</div>
+      <div class="kpi-bar"><div class="kpi-bar-fill" style="width:81%;background:var(--amber)"></div></div>
+      <div class="kpi-delta warn">vs FY2025 same 3 months: R28.62M</div>
+    </div>
+  </div>
+
+  <div class="stitle">Monthly Sales — Calendar Year Comparison</div>
+  <div class="g2">
+    <div class="card">
+      <div class="card-title">Monthly Net Revenue — 2024 / 2025 / 2026</div>
+      <div class="card-sub">Jan–Dec — 2026 only has Mar–May data</div>
+      <div class="chart-wrap h300"><canvas id="cYOYLine"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="card-title">YOY Growth % by Calendar Month</div>
+      <div class="card-sub">Green ≥ 30% target · Amber = growing · Red = declining</div>
+      <div class="chart-wrap h300"><canvas id="cYOYGrowth"></canvas></div>
+    </div>
+  </div>
+
+  <div class="stitle">Sales Rep Performance — FY Summary</div>
+  <div class="card full">
+    <div class="card-title">Rep Revenue by Financial Year</div>
+    <div class="card-sub">FY2026 growth vs equivalent 3-month period in FY2025 (Mar–May)</div>
+    <div class="tw">
+      <table>
+        <thead><tr>
+          <th>Rep</th>
+          <th class="num">FY2024</th>
+          <th class="num">FY2025</th>
+          <th class="num">Growth 25v24</th>
+          <th class="num">FY2025 (3mo)</th>
+          <th class="num">FY2026 YTD</th>
+          <th class="num">Growth 26v25</th>
+        </tr></thead>
+        <tbody>
+        <tr>
+          <td><strong>BV</strong><br><small style="color:var(--muted)">Bhadresh Vallabh</small></td>
+          <td class="num">R50.19M</td>
+          <td class="num">R59.68M</td>
+          <td class="num"><span class="pill amber">+18.9%</span></td>
+          <td class="num">R11.88M<br><small style="color:var(--muted)">same 3 mo</small></td>
+          <td class="num">R9.47M</td>
+          <td class="num"><span class="pill red">-20.3%</span></td>
+        </tr>
+        <tr>
+          <td><strong>NP</strong><br><small style="color:var(--muted)">Nikhil Panchal</small></td>
+          <td class="num">R31.53M</td>
+          <td class="num">R50.17M</td>
+          <td class="num"><span class="pill green">+59.1%</span></td>
+          <td class="num">R10.71M<br><small style="color:var(--muted)">same 3 mo</small></td>
+          <td class="num">R7.80M</td>
+          <td class="num"><span class="pill red">-27.2%</span></td>
+        </tr>
+        <tr>
+          <td><strong>AP</strong><br><small style="color:var(--muted)">Amit Patel</small></td>
+          <td class="num">R11.53M</td>
+          <td class="num">R13.81M</td>
+          <td class="num"><span class="pill amber">+19.8%</span></td>
+          <td class="num">R2.22M<br><small style="color:var(--muted)">same 3 mo</small></td>
+          <td class="num">R3.06M</td>
+          <td class="num"><span class="pill green">+37.9%</span></td>
+        </tr>
+        <tr>
+          <td><strong>AC</strong><br><small style="color:var(--muted)">Aboo Cassim</small></td>
+          <td class="num">R10.02M</td>
+          <td class="num">R15.35M</td>
+          <td class="num"><span class="pill green">+53.3%</span></td>
+          <td class="num">R3.40M<br><small style="color:var(--muted)">same 3 mo</small></td>
+          <td class="num">R2.37M</td>
+          <td class="num"><span class="pill red">-30.3%</span></td>
+        </tr>
+        <tr>
+          <td><strong>BM</strong><br><small style="color:var(--muted)">Byron Minnie</small></td>
+          <td class="num">R1.0K</td>
+          <td class="num">R212.8K</td>
+          <td class="num"><span class="pill green">+20797.2%</span></td>
+          <td class="num">R0<br><small style="color:var(--muted)">same 3 mo</small></td>
+          <td class="num">R74.0K</td>
+          <td class="num"><span class="pill neutral">—</span></td>
+        </tr>
+        <tr style="font-weight:700;background:#f8f8f4">
+          <td><strong>TOTAL</strong></td>
+          <td class="num">R130.16M</td>
+          <td class="num">R141.61M</td>
+          <td class="num"><span class="pill amber">+8.8%</span></td>
+          <td class="num">R28.62M</td>
+          <td class="num">R23.25M</td>
+          <td class="num"><span class="pill red">-18.8%</span></td>
+        </tr></tbody>
+      </table>
+    </div>
+  </div>
+
+</div><!-- /yoy -->
+
+
+<!-- ═══════════════════════════════════════════════════════ TAB 2: FY2025 -->
+<div id="panel-fy2025" class="tab-panel">
+
+  <div class="stitle">FY2025 Summary (March 2025 – February 2026)</div>
+  <div class="kpi-grid">
+    <div class="kpi">
+      <div class="kpi-label">Gross Invoices</div>
+      <div class="kpi-value">R148.79M</div>
+      <div class="kpi-delta neu">Before credit notes</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Credit Notes</div>
+      <div class="kpi-value" style="color:var(--red)">R7.18M</div>
+      <div class="kpi-delta dn">-95.2%</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Net Revenue</div>
+      <div class="kpi-value">R141.61M</div>
+      <div class="kpi-delta warn"><span class="pill amber">+8.8%</span> vs FY2024</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">FY2024 Baseline</div>
+      <div class="kpi-value">R130.16M</div>
+      <div class="kpi-delta neu">Prior year net revenue</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">FY2025 Target (+30%)</div>
+      <div class="kpi-value">R169.21M</div>
+      <div class="kpi-bar"><div class="kpi-bar-fill" style="width:84%;background:var(--amber)"></div></div>
+      <div class="kpi-delta dn">Gap: R27.59M below target</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Target Attainment</div>
+      <div class="kpi-value">83.7%</div>
+      <div class="kpi-bar"><div class="kpi-bar-fill" style="width:84%;background:var(--amber)"></div></div>
+      <div class="kpi-delta warn">Target = 100% · Need 30% growth = 130%</div>
+    </div>
+  </div>
+
+  <div class="stitle">FY2025 Rep Performance</div>
+  <div class="card full">
+    <div class="card-title">Rep — FY2025 vs FY2024 Baseline &amp; 30% Target</div>
+    <div class="card-sub">Target = FY2024 full-year net × 1.30</div>
+    <div class="tw">
+      <table>
+        <thead><tr>
+          <th>Rep</th>
+          <th class="num">FY2024 Baseline</th>
+          <th class="num">Target (+30%)</th>
+          <th class="num">FY2025 Actual</th>
+          <th class="num">Growth</th>
+          <th class="num">vs Target</th>
+        </tr></thead>
+        <tbody>
+        <tr>
+          <td><strong>BV</strong><br><small style="color:var(--muted)">Bhadresh Vallabh</small></td>
+          <td class="num">R50.19M</td>
+          <td class="num">R65.25M</td>
+          <td class="num">R59.68M</td>
+          <td class="num"><span class="pill amber">+18.9%</span></td>
+          <td class="num"><span class="pill red">-8.5%</span></td>
+        </tr>
+        <tr>
+          <td><strong>NP</strong><br><small style="color:var(--muted)">Nikhil Panchal</small></td>
+          <td class="num">R31.53M</td>
+          <td class="num">R40.99M</td>
+          <td class="num">R50.17M</td>
+          <td class="num"><span class="pill green">+59.1%</span></td>
+          <td class="num"><span class="pill amber">+22.4%</span></td>
+        </tr>
+        <tr>
+          <td><strong>AP</strong><br><small style="color:var(--muted)">Amit Patel</small></td>
+          <td class="num">R11.53M</td>
+          <td class="num">R14.98M</td>
+          <td class="num">R13.81M</td>
+          <td class="num"><span class="pill amber">+19.8%</span></td>
+          <td class="num"><span class="pill red">-7.8%</span></td>
+        </tr>
+        <tr>
+          <td><strong>AC</strong><br><small style="color:var(--muted)">Aboo Cassim</small></td>
+          <td class="num">R10.02M</td>
+          <td class="num">R13.02M</td>
+          <td class="num">R15.35M</td>
+          <td class="num"><span class="pill green">+53.3%</span></td>
+          <td class="num"><span class="pill amber">+17.9%</span></td>
+        </tr>
+        <tr>
+          <td><strong>BM</strong><br><small style="color:var(--muted)">Byron Minnie</small></td>
+          <td class="num">R1.0K</td>
+          <td class="num">R1.3K</td>
+          <td class="num">R212.8K</td>
+          <td class="num"><span class="pill green">+20797.2%</span></td>
+          <td class="num"><span class="pill green">+15974.8%</span></td>
+        </tr>
+        <tr style="font-weight:700;background:#f8f8f4">
+          <td><strong>TOTAL</strong></td>
+          <td class="num">R130.16M</td>
+          <td class="num">R169.21M</td>
+          <td class="num">R141.61M</td>
+          <td class="num"><span class="pill amber">+8.8%</span></td>
+          <td class="num"><span class="pill red">-16.3%</span></td>
+        </tr></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="stitle">FY2025 Monthly Trend</div>
+  <div class="card full">
+    <div class="card-title">Net Revenue by Rep — Monthly (Mar 2025 – Feb 2026)</div>
+    <div class="card-sub">Stacked bar — each colour = one rep</div>
+    <div class="chart-wrap h360"><canvas id="cFY25Monthly"></canvas></div>
+  </div>
+
+  <div class="stitle">FY2025 Top 15 Accounts</div>
+  <div class="card full">
+    <div class="card-title">Top Accounts by Net Revenue — FY2025</div>
+    <div class="tw">
+      <table>
+        <thead><tr><th>#</th><th>Account</th><th>Store Name</th><th>Rep</th><th>Area</th><th class="num">Net Revenue</th></tr></thead>
+        <tbody>
+        <tr>
+          <td>1</td>
+          <td><strong>KB011</strong></td>
+          <td>Brits Hardware & Glass</td>
+          <td>BV</td>
+          <td>BV1</td>
+          <td class="num">R13.11M</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td><strong>KK021</strong></td>
+          <td>Kit Kat Group (Pty) Ltd</td>
+          <td>NP</td>
+          <td>NP1</td>
+          <td class="num">R9.24M</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td><strong>KS019</strong></td>
+          <td>S.I.Hardware</td>
+          <td>NP</td>
+          <td>NP4</td>
+          <td class="num">R5.60M</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td><strong>KM027</strong></td>
+          <td>RANK HARDWARE</td>
+          <td>AC</td>
+          <td>AC1</td>
+          <td class="num">R5.44M</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td><strong>KB100</strong></td>
+          <td>Builders Direct Depot Pty Ltd</td>
+          <td>NP</td>
+          <td>NP2</td>
+          <td class="num">R4.30M</td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td><strong>KH035</strong></td>
+          <td>HGM Steelboys CC</td>
+          <td>BV</td>
+          <td>BV3</td>
+          <td class="num">R4.26M</td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td><strong>KD008</strong></td>
+          <td>Dada's World of Hardware CC</td>
+          <td>BV</td>
+          <td>BV3</td>
+          <td class="num">R3.95M</td>
+        </tr>
+        <tr>
+          <td>8</td>
+          <td><strong>KD001</strong></td>
+          <td>Dainty's Wholesale Hardware</td>
+          <td>BV</td>
+          <td>BV1</td>
+          <td class="num">R3.83M</td>
+        </tr>
+        <tr>
+          <td>9</td>
+          <td><strong>KS029</strong></td>
+          <td>Patels Hardware</td>
+          <td>BV</td>
+          <td>BV3</td>
+          <td class="num">R3.72M</td>
+        </tr>
+        <tr>
+          <td>10</td>
+          <td><strong>KP005</strong></td>
+          <td>Patel (Nkomazi Imp. & Exp. CC)</td>
+          <td>BV</td>
+          <td>BV2</td>
+          <td class="num">R3.63M</td>
+        </tr>
+        <tr>
+          <td>11</td>
+          <td><strong>KH021</strong></td>
+          <td>Ebrahim Abramjee Traders CC</td>
+          <td>AC</td>
+          <td>AC3</td>
+          <td class="num">R2.72M</td>
+        </tr>
+        <tr>
+          <td>12</td>
+          <td><strong>KM127</strong></td>
+          <td>Myka Trade 2 T A New Builders</td>
+          <td>BV</td>
+          <td>BV3</td>
+          <td class="num">R2.49M</td>
+        </tr>
+        <tr>
+          <td>13</td>
+          <td><strong>KE005</strong></td>
+          <td>Easy Build Hardware</td>
+          <td>NP</td>
+          <td>NP1</td>
+          <td class="num">R2.16M</td>
+        </tr>
+        <tr>
+          <td>14</td>
+          <td><strong>KM071</strong></td>
+          <td>Inyameko Trading 1605cc</td>
+          <td>NP</td>
+          <td>NP4</td>
+          <td class="num">R2.00M</td>
+        </tr>
+        <tr>
+          <td>15</td>
+          <td><strong>KS004</strong></td>
+          <td>S.E.Z. Superette</td>
+          <td>BV</td>
+          <td>BV1</td>
+          <td class="num">R1.97M</td>
+        </tr></tbody>
+      </table>
+    </div>
+  </div>
+
+</div><!-- /fy2025 -->
+
+
+<!-- ═══════════════════════════════════════════════════════ TAB 3: FY2026 -->
+<div id="panel-fy2026" class="tab-panel">
+
+  <div class="stitle">FY2026 YTD Summary (March – May 2026)</div>
+  <div class="kpi-grid">
+    <div class="kpi">
+      <div class="kpi-label">YTD Net Revenue</div>
+      <div class="kpi-value">R23.25M</div>
+      <div class="kpi-delta neu">3 months completed</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">FY2025 Same 3 Months</div>
+      <div class="kpi-value">R28.62M</div>
+      <div class="kpi-delta neu">Mar–May 2025 baseline</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">YTD Growth vs Prior Year</div>
+      <div class="kpi-value">-18.8%</div>
+      <div class="kpi-delta warn"><span class="pill red">-18.8%</span></div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">YTD Target (30% growth)</div>
+      <div class="kpi-value">R37.21M</div>
+      <div class="kpi-delta warn">Gap: R13.95M below</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Annualised Run Rate</div>
+      <div class="kpi-value">R93.02M</div>
+      <div class="kpi-delta warn">÷3 × 12 — projection only</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">FY2026 Full-Year Target</div>
+      <div class="kpi-value">R184.10M</div>
+      <div class="kpi-delta neu">FY2025 (R141.61M) × 1.30</div>
+    </div>
+  </div>
+
+  <div class="stitle">FY2026 Month-by-Month Progress</div>
+  <div class="card full">
+    <div class="card-title">Completed Months — Actual vs Target (FY2025 same month × 1.30)</div>
+    <div class="tw">
+      <table>
+        <thead><tr>
+          <th>Month</th>
+          <th class="num">FY2025 Baseline</th>
+          <th class="num">Target (+30%)</th>
+          <th class="num">FY2026 Actual</th>
+          <th class="num">Growth</th>
+        </tr></thead>
+        <tbody>
+        <tr>
+          <td>Mar 2026</td>
+          <td class="num">R9.57M</td>
+          <td class="num">R12.45M</td>
+          <td class="num">R10.17M</td>
+          <td class="num"><span class="pill amber">+6.2%</span></td>
+        </tr>
+        <tr>
+          <td>Apr 2026</td>
+          <td class="num">R9.92M</td>
+          <td class="num">R12.89M</td>
+          <td class="num">R12.44M</td>
+          <td class="num"><span class="pill amber">+25.5%</span></td>
+        </tr>
+        <tr>
+          <td>May 2026 ⚡ <span class="partial-badge">Partial</span></td>
+          <td class="num">R9.13M</td>
+          <td class="num">R11.87M</td>
+          <td class="num">R644.7K</td>
+          <td class="num"><span class="pill red">-92.9%</span></td>
+        </tr></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="stitle">FY2026 YTD Rep Performance</div>
+  <div class="card full">
+    <div class="card-title">Rep — FY2026 YTD vs FY2025 Same Period &amp; 30% Target</div>
+    <div class="tw">
+      <table>
+        <thead><tr>
+          <th>Rep</th>
+          <th class="num">FY2025 Baseline</th>
+          <th class="num">Target (+30%)</th>
+          <th class="num">FY2026 YTD</th>
+          <th class="num">Growth</th>
+          <th class="num">vs Target</th>
+        </tr></thead>
+        <tbody>
+        <tr>
+          <td><strong>BV</strong><br><small style="color:var(--muted)">Bhadresh Vallabh</small></td>
+          <td class="num">R11.88M<br><small style="color:var(--muted)">same 3 mo</small></td>
+          <td class="num">R15.45M</td>
+          <td class="num">R9.47M</td>
+          <td class="num"><span class="pill red">-20.3%</span></td>
+          <td class="num"><span class="pill red">-38.7%</span></td>
+        </tr>
+        <tr>
+          <td><strong>NP</strong><br><small style="color:var(--muted)">Nikhil Panchal</small></td>
+          <td class="num">R10.71M<br><small style="color:var(--muted)">same 3 mo</small></td>
+          <td class="num">R13.93M</td>
+          <td class="num">R7.80M</td>
+          <td class="num"><span class="pill red">-27.2%</span></td>
+          <td class="num"><span class="pill red">-44.0%</span></td>
+        </tr>
+        <tr>
+          <td><strong>AP</strong><br><small style="color:var(--muted)">Amit Patel</small></td>
+          <td class="num">R2.22M<br><small style="color:var(--muted)">same 3 mo</small></td>
+          <td class="num">R2.88M</td>
+          <td class="num">R3.06M</td>
+          <td class="num"><span class="pill green">+37.9%</span></td>
+          <td class="num"><span class="pill amber">+6.1%</span></td>
+        </tr>
+        <tr>
+          <td><strong>AC</strong><br><small style="color:var(--muted)">Aboo Cassim</small></td>
+          <td class="num">R3.40M<br><small style="color:var(--muted)">same 3 mo</small></td>
+          <td class="num">R4.42M</td>
+          <td class="num">R2.37M</td>
+          <td class="num"><span class="pill red">-30.3%</span></td>
+          <td class="num"><span class="pill red">-46.4%</span></td>
+        </tr>
+        <tr>
+          <td><strong>BM</strong><br><small style="color:var(--muted)">Byron Minnie</small></td>
+          <td class="num">R0<br><small style="color:var(--muted)">same 3 mo</small></td>
+          <td class="num">R0</td>
+          <td class="num">R74.0K</td>
+          <td class="num"><span class="pill neutral">—</span></td>
+          <td class="num"><span class="pill neutral">—</span></td>
+        </tr></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="stitle">FY2026 Top 15 Accounts (YTD)</div>
+  <div class="card full">
+    <div class="card-title">Top Accounts by Net Revenue — FY2026 YTD</div>
+    <div class="tw">
+      <table>
+        <thead><tr><th>#</th><th>Account</th><th>Store Name</th><th>Rep</th><th>Area</th><th class="num">Net Revenue</th></tr></thead>
+        <tbody>
+        <tr>
+          <td>1</td>
+          <td><strong>KB011</strong></td>
+          <td>Brits Hardware & Glass</td>
+          <td>BV</td>
+          <td>BV1</td>
+          <td class="num">R2.54M</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td><strong>KK021</strong></td>
+          <td>Kit Kat Group (Pty) Ltd</td>
+          <td>NP</td>
+          <td>NP1</td>
+          <td class="num">R1.32M</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td><strong>KS019</strong></td>
+          <td>S.I. Hardware</td>
+          <td>NP</td>
+          <td>NP4</td>
+          <td class="num">R963.5K</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td><strong>KH021</strong></td>
+          <td>Ebrahim Abramjee Traders CC</td>
+          <td>AC</td>
+          <td>AC1</td>
+          <td class="num">R716.1K</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td><strong>KH035</strong></td>
+          <td>HGM Steelboys CC</td>
+          <td>BV</td>
+          <td>BV3</td>
+          <td class="num">R687.5K</td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td><strong>KM027</strong></td>
+          <td>Jane Furse Building Supply</td>
+          <td>BP</td>
+          <td></td>
+          <td class="num">R599.9K</td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td><strong>KP005</strong></td>
+          <td>Patel (Nkomazi Imp. & Exp. CC)</td>
+          <td>BV</td>
+          <td>BV2</td>
+          <td class="num">R537.2K</td>
+        </tr>
+        <tr>
+          <td>8</td>
+          <td><strong>KW004</strong></td>
+          <td>Buildware ta Siam Trading</td>
+          <td>BV</td>
+          <td>BV4</td>
+          <td class="num">R535.5K</td>
+        </tr>
+        <tr>
+          <td>9</td>
+          <td><strong>KM127</strong></td>
+          <td>Myka Trade 2  Mankweng</td>
+          <td>BV</td>
+          <td>BV3</td>
+          <td class="num">R521.9K</td>
+        </tr>
+        <tr>
+          <td>10</td>
+          <td><strong>KD001</strong></td>
+          <td>Dainty's Wholesale Hardware</td>
+          <td>BV</td>
+          <td>BV1</td>
+          <td class="num">R484.7K</td>
+        </tr>
+        <tr>
+          <td>11</td>
+          <td><strong>KM071</strong></td>
+          <td>Inyameko Trading 1605cc</td>
+          <td>NP</td>
+          <td>NP4</td>
+          <td class="num">R479.6K</td>
+        </tr>
+        <tr>
+          <td>12</td>
+          <td><strong>KE005</strong></td>
+          <td>Easy Build Hardware</td>
+          <td>NP</td>
+          <td>NP1</td>
+          <td class="num">R455.1K</td>
+        </tr>
+        <tr>
+          <td>13</td>
+          <td><strong>KB100</strong></td>
+          <td>Builders Direct Depot Pty Ltd</td>
+          <td>NP</td>
+          <td>NP2</td>
+          <td class="num">R385.8K</td>
+        </tr>
+        <tr>
+          <td>14</td>
+          <td><strong>KS004</strong></td>
+          <td>S.E.Z. Superette</td>
+          <td>BV</td>
+          <td>BV1</td>
+          <td class="num">R383.7K</td>
+        </tr>
+        <tr>
+          <td>15</td>
+          <td><strong>KD008</strong></td>
+          <td>Dada's World of Hardware CC</td>
+          <td>BV</td>
+          <td>BV3</td>
+          <td class="num">R333.0K</td>
+        </tr></tbody>
+      </table>
+    </div>
+  </div>
+
+</div><!-- /fy2026 -->
+
+
+<!-- ══════════════════════════════════════════════════════ TAB 4: MONTHLY -->
+<div id="panel-monthly" class="tab-panel">
+
+  <div class="stitle" style="margin-top:8px">Monthly View — Same Month Across All 3 Years</div>
+
+  <div class="month-nav">
+    <button class="nav-btn" onclick="prevMonth()">&#8592;</button>
+    <div class="month-label" id="monthLabel">April 2026</div>
+    <button class="nav-btn" onclick="nextMonth()">&#8594;</button>
+    <select id="monthSelect" onchange="jumpToMonth(this.value)">
+      <option value="2024-3">Mar 2024</option>
+<option value="2024-4">Apr 2024</option>
+<option value="2024-5">May 2024</option>
+<option value="2024-6">Jun 2024</option>
+<option value="2024-7">Jul 2024</option>
+<option value="2024-8">Aug 2024</option>
+<option value="2024-9">Sep 2024</option>
+<option value="2024-10">Oct 2024</option>
+<option value="2024-11">Nov 2024</option>
+<option value="2024-12">Dec 2024</option>
+<option value="2025-1">Jan 2025</option>
+<option value="2025-2">Feb 2025</option>
+<option value="2025-3">Mar 2025</option>
+<option value="2025-4">Apr 2025</option>
+<option value="2025-5">May 2025</option>
+<option value="2025-6">Jun 2025</option>
+<option value="2025-7">Jul 2025</option>
+<option value="2025-8">Aug 2025</option>
+<option value="2025-9">Sep 2025</option>
+<option value="2025-10">Oct 2025</option>
+<option value="2025-11">Nov 2025</option>
+<option value="2025-12">Dec 2025</option>
+<option value="2026-1">Jan 2026</option>
+<option value="2026-2">Feb 2026</option>
+<option value="2026-3">Mar 2026</option>
+<option value="2026-4">Apr 2026</option>
+<option value="2026-5">May 2026</option>
+
+    </select>
+    <span id="partialBadge" class="partial-badge" style="display:none">⚡ Partial month</span>
+  </div>
+
+  <!-- Company KPI cards -->
+  <div class="kpi-grid" id="monthlyKpis">
+    <!-- filled by JS -->
+  </div>
+
+  <!-- Rep comparison table -->
+  <div class="card full" style="margin-top:20px">
+    <div class="card-title">Sales Rep — 3-Year Comparison for Selected Month</div>
+    <div class="card-sub">Target = prior-year same-month sales × 1.30 &nbsp;|&nbsp; Green = ≥ 30% growth · Amber = 0–29% · Red = declining</div>
+    <div class="tw">
+      <table>
+        <thead><tr>
+          <th>Rep</th>
+          <th class="num" id="th2024">2024</th>
+          <th class="num" id="th2025">2025</th>
+          <th class="num">Growth 25v24</th>
+          <th class="num">Target 25</th>
+          <th class="num" id="th2026">2026</th>
+          <th class="num">Growth 26v25</th>
+          <th class="num">Target 26</th>
+        </tr></thead>
+        <tbody id="monthlyRepTbody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Monthly trend chart for selected month -->
+  <div class="card full" style="margin-top:20px">
+    <div class="card-title">Company — Last 12 Months Trend (to selected month)</div>
+    <div class="chart-wrap h260"><canvas id="cMonthTrend"></canvas></div>
+  </div>
+
+</div><!-- /monthly -->
+
+</div><!-- /main -->
+
+<footer>
+  <strong>Olympic Paints</strong> · Sales Performance Dashboard<br>
+  Data: <em>Sales_Invoices_All.parquet</em> · 27 month-data-points across FY2024–FY2026<br>
+  Target = prior-year same-month × 1.30 (30% growth rule) · Generated 05 May 2026 11:29
+</footer>
+
+<script>
+// ── Embedded data ─────────────────────────────────────────────────────────────
+const DATA = {"generated": "05 May 2026 11:29", "reps": ["BV", "NP", "AP", "AC", "BM"], "rep_names": {"BV": "Bhadresh Vallabh", "NP": "Nikhil Panchal", "AP": "Amit Patel", "AC": "Aboo Cassim", "BM": "Byron Minnie"}, "month_labels": {"1": "Jan", "2": "Feb", "3": "Mar", "4": "Apr", "5": "May", "6": "Jun", "7": "Jul", "8": "Aug", "9": "Sep", "10": "Oct", "11": "Nov", "12": "Dec"}, "monthly_company": {"2024": {"3": {"inv": 10678890.14, "cr": 1383166.07, "net": 9295724.07}, "4": {"inv": 8708534.63, "cr": 266956.46, "net": 8441578.17}, "5": {"inv": 10876794.16, "cr": 359018.18, "net": 10517775.98}, "6": {"inv": 9639135.39, "cr": 283139.54, "net": 9355995.85}, "7": {"inv": 10637524.28, "cr": 244068.69, "net": 10393455.59}, "8": {"inv": 12337492.01, "cr": 280399.54, "net": 12057092.47}, "9": {"inv": 11407241.69, "cr": 336394.61, "net": 11070847.08}, "10": {"inv": 12531569.31, "cr": 434992.87, "net": 12096576.44}, "11": {"inv": 15367880.0, "cr": 390032.0, "net": 14977848.0}, "12": {"inv": 17720405.77, "cr": 659532.67, "net": 17060873.1}}, "2025": {"1": {"inv": 7425210.34, "cr": 251680.7, "net": 7173529.64}, "2": {"inv": 8257662.08, "cr": 540406.86, "net": 7717255.22}, "3": {"inv": 9909795.72, "cr": 334843.02, "net": 9574952.7}, "4": {"inv": 10484020.54, "cr": 567641.39, "net": 9916379.15}, "5": {"inv": 10171143.75, "cr": 1041009.15, "net": 9130134.6}, "6": {"inv": 9934262.11, "cr": 380942.51, "net": 9553319.6}, "7": {"inv": 12595122.34, "cr": 480747.62, "net": 12114374.72}, "8": {"inv": 12634021.56, "cr": 601615.14, "net": 12032406.42}, "9": {"inv": 13360598.59, "cr": 607328.13, "net": 12753270.46}, "10": {"inv": 16467846.63, "cr": 445941.58, "net": 16021905.05}, "11": {"inv": 16517295.77, "cr": 893879.18, "net": 15623416.59}, "12": {"inv": 18726389.67, "cr": 411864.34, "net": 18314525.33}}, "2026": {"1": {"inv": 7881208.89, "cr": 1125694.58, "net": 6755514.31}, "2": {"inv": 10111729.43, "cr": 287299.32, "net": 9824430.11}, "3": {"inv": 10877104.46, "cr": 711685.88, "net": 10165418.58}, "4": {"inv": 14834111.73, "cr": 2389489.26, "net": 12444622.47}, "5": {"inv": 646617.27, "cr": 1910.58, "net": 644706.69}}}, "monthly_rep": {"BV": {"2024": {"3": 3094307.22, "4": 3275413.97, "5": 4594241.42, "6": 3775329.27, "7": 4159952.71, "8": 4938314.7, "9": 4804869.52, "10": 4693186.53, "11": 4931707.39, "12": 7211815.83}, "2025": {"1": 2485102.96, "2": 2228934.76, "3": 3765312.01, "4": 3862571.5, "5": 4253019.74, "6": 4022819.12, "7": 5354681.86, "8": 4727295.14, "9": 5974009.73, "10": 7950509.83, "11": 6938273.83, "12": 7009168.02}, "2026": {"1": 2099112.9, "2": 3723615.08, "3": 5067828.36, "4": 4361203.43, "5": 38916.11}}, "NP": {"2024": {"3": 2306087.65, "4": 2378568.71, "5": 2560911.54, "6": 2356735.17, "7": 2764935.25, "8": 2586172.11, "9": 1927278.32, "10": 3270534.78, "11": 3469553.06, "12": 4251813.8}, "2025": {"1": 1747169.93, "2": 1907425.09, "3": 3624528.45, "4": 3586410.55, "5": 3502191.62, "6": 3354854.74, "7": 3905795.02, "8": 4275505.66, "9": 3792598.66, "10": 4330911.33, "11": 5020111.4, "12": 7447786.12}, "2026": {"1": 3288773.26, "2": 4038739.36, "3": 3057397.78, "4": 4455001.72, "5": 284412.21}}, "AP": {"2024": {"3": 886328.26, "4": 834016.86, "5": 864885.27, "6": 520633.98, "7": 764702.13, "8": 1271125.98, "9": 721869.4, "10": 996535.08, "11": 1678863.87, "12": 1546826.6}, "2025": {"1": 630228.34, "2": 810768.36, "3": 694954.01, "4": 970487.69, "5": 552666.82, "6": 920011.07, "7": 1129593.08, "8": 1391893.99, "9": 1229475.18, "10": 1331019.08, "11": 2282723.98, "12": 1848353.19}, "2026": {"1": 785147.22, "2": 675807.3, "3": 966127.6, "4": 1909852.32, "5": 182791.88}}, "AC": {"2024": {"3": 703533.23, "4": 559144.53, "5": 743135.11, "6": 702234.78, "7": 867164.18, "8": 917523.13, "9": 866998.04, "10": 1044100.35, "11": 1062137.07, "12": 1296320.39}, "2025": {"1": 585698.76, "2": 668058.13, "3": 1411589.63, "4": 874073.8, "5": 1111127.07, "6": 1106673.18, "7": 1346526.83, "8": 1241199.82, "9": 1449913.86, "10": 1985822.1, "11": 1236843.74, "12": 1671834.78}, "2026": {"1": 766620.64, "2": 1151367.68, "3": 692901.28, "4": 1600180.58, "5": 74167.71}}, "BM": {"2024": {"4": 1018.44}, "2025": {"6": 1193.21, "7": 4418.42, "8": 146393.66, "9": 8505.83, "10": 32364.79, "11": 11971.29, "12": 1477.39}, "2026": {"1": 2219.7, "2": 4281.33, "3": 50074.4, "4": 23949.07}}}, "fy_monthly_company": {"2024": {"3": {"inv": 10678890.14, "cr": 1383166.07, "net": 9295724.07}, "4": {"inv": 8708534.63, "cr": 266956.46, "net": 8441578.17}, "5": {"inv": 10876794.16, "cr": 359018.18, "net": 10517775.98}, "6": {"inv": 9639135.39, "cr": 283139.54, "net": 9355995.85}, "7": {"inv": 10637524.28, "cr": 244068.69, "net": 10393455.59}, "8": {"inv": 12337492.01, "cr": 280399.54, "net": 12057092.47}, "9": {"inv": 11407241.69, "cr": 336394.61, "net": 11070847.08}, "10": {"inv": 12531569.31, "cr": 434992.87, "net": 12096576.44}, "11": {"inv": 15367880.0, "cr": 390032.0, "net": 14977848.0}, "12": {"inv": 17720405.77, "cr": 659532.67, "net": 17060873.1}, "1": {"inv": 7425210.34, "cr": 251680.7, "net": 7173529.64}, "2": {"inv": 8257662.08, "cr": 540406.86, "net": 7717255.22}}, "2025": {"3": {"inv": 9909795.72, "cr": 334843.02, "net": 9574952.7}, "4": {"inv": 10484020.54, "cr": 567641.39, "net": 9916379.15}, "5": {"inv": 10171143.75, "cr": 1041009.15, "net": 9130134.6}, "6": {"inv": 9934262.11, "cr": 380942.51, "net": 9553319.6}, "7": {"inv": 12595122.34, "cr": 480747.62, "net": 12114374.72}, "8": {"inv": 12634021.56, "cr": 601615.14, "net": 12032406.42}, "9": {"inv": 13360598.59, "cr": 607328.13, "net": 12753270.46}, "10": {"inv": 16467846.63, "cr": 445941.58, "net": 16021905.05}, "11": {"inv": 16517295.77, "cr": 893879.18, "net": 15623416.59}, "12": {"inv": 18726389.67, "cr": 411864.34, "net": 18314525.33}, "1": {"inv": 7881208.89, "cr": 1125694.58, "net": 6755514.31}, "2": {"inv": 10111729.43, "cr": 287299.32, "net": 9824430.11}}, "2026": {"3": {"inv": 10877104.46, "cr": 711685.88, "net": 10165418.58}, "4": {"inv": 14834111.73, "cr": 2389489.26, "net": 12444622.47}, "5": {"inv": 646617.27, "cr": 1910.58, "net": 644706.69}}}, "fy_monthly_rep": {"BV": {"2024": {"3": 3094307.22, "4": 3275413.97, "5": 4594241.42, "6": 3775329.27, "7": 4159952.71, "8": 4938314.7, "9": 4804869.52, "10": 4693186.53, "11": 4931707.39, "12": 7211815.83, "1": 2485102.96, "2": 2228934.76}, "2025": {"3": 3765312.01, "4": 3862571.5, "5": 4253019.74, "6": 4022819.12, "7": 5354681.86, "8": 4727295.14, "9": 5974009.73, "10": 7950509.83, "11": 6938273.83, "12": 7009168.02, "1": 2099112.9, "2": 3723615.08}, "2026": {"3": 5067828.36, "4": 4361203.43, "5": 38916.11}}, "NP": {"2024": {"3": 2306087.65, "4": 2378568.71, "5": 2560911.54, "6": 2356735.17, "7": 2764935.25, "8": 2586172.11, "9": 1927278.32, "10": 3270534.78, "11": 3469553.06, "12": 4251813.8, "1": 1747169.93, "2": 1907425.09}, "2025": {"3": 3624528.45, "4": 3586410.55, "5": 3502191.62, "6": 3354854.74, "7": 3905795.02, "8": 4275505.66, "9": 3792598.66, "10": 4330911.33, "11": 5020111.4, "12": 7447786.12, "1": 3288773.26, "2": 4038739.36}, "2026": {"3": 3057397.78, "4": 4455001.72, "5": 284412.21}}, "AP": {"2024": {"3": 886328.26, "4": 834016.86, "5": 864885.27, "6": 520633.98, "7": 764702.13, "8": 1271125.98, "9": 721869.4, "10": 996535.08, "11": 1678863.87, "12": 1546826.6, "1": 630228.34, "2": 810768.36}, "2025": {"3": 694954.01, "4": 970487.69, "5": 552666.82, "6": 920011.07, "7": 1129593.08, "8": 1391893.99, "9": 1229475.18, "10": 1331019.08, "11": 2282723.98, "12": 1848353.19, "1": 785147.22, "2": 675807.3}, "2026": {"3": 966127.6, "4": 1909852.32, "5": 182791.88}}, "AC": {"2024": {"3": 703533.23, "4": 559144.53, "5": 743135.11, "6": 702234.78, "7": 867164.18, "8": 917523.13, "9": 866998.04, "10": 1044100.35, "11": 1062137.07, "12": 1296320.39, "1": 585698.76, "2": 668058.13}, "2025": {"3": 1411589.63, "4": 874073.8, "5": 1111127.07, "6": 1106673.18, "7": 1346526.83, "8": 1241199.82, "9": 1449913.86, "10": 1985822.1, "11": 1236843.74, "12": 1671834.78, "1": 766620.64, "2": 1151367.68}, "2026": {"3": 692901.28, "4": 1600180.58, "5": 74167.71}}, "BM": {"2024": {"4": 1018.44}, "2025": {"6": 1193.21, "7": 4418.42, "8": 146393.66, "9": 8505.83, "10": 32364.79, "11": 11971.29, "12": 1477.39, "1": 2219.7, "2": 4281.33}, "2026": {"3": 50074.4, "4": 23949.07}}}, "fy_totals": {"2024": {"inv": 135588339.8, "cr": 5429788.19, "net": 130158551.61}, "2025": {"inv": 148793435.0, "cr": 7178805.96, "net": 141614629.04}, "2026": {"inv": 26357833.46, "cr": 3103085.72, "net": 23254747.74}}, "fy_rep": {"BV": {"2024": 50193176.28, "2025": 59680388.76, "2026": 9467947.9}, "NP": {"2024": 31527185.41, "2025": 50168206.17, "2026": 7796811.71}, "AP": {"2024": 11526784.13, "2025": 13812132.61, "2026": 3058771.8}, "AC": {"2024": 10016047.7, "2025": 15353593.13, "2026": 2367249.57}, "BM": {"2024": 1018.44, "2025": 212825.62, "2026": 74023.47}}, "top_accounts": {"2025": [{"accno": "KB011", "net": 13105638.64, "store": "Brits Hardware & Glass", "rep": "BV", "area": "BV1"}, {"accno": "KK021", "net": 9240321.56, "store": "Kit Kat Group (Pty) Ltd", "rep": "NP", "area": "NP1"}, {"accno": "KS019", "net": 5599547.7, "store": "S.I.Hardware", "rep": "NP", "area": "NP4"}, {"accno": "KM027", "net": 5441615.11, "store": "RANK HARDWARE", "rep": "AC", "area": "AC1"}, {"accno": "KB100", "net": 4298517.18, "store": "Builders Direct Depot Pty Ltd", "rep": "NP", "area": "NP2"}, {"accno": "KH035", "net": 4260821.0, "store": "HGM Steelboys CC", "rep": "BV", "area": "BV3"}, {"accno": "KD008", "net": 3951864.88, "store": "Dada's World of Hardware CC", "rep": "BV", "area": "BV3"}, {"accno": "KD001", "net": 3831741.5, "store": "Dainty's Wholesale Hardware", "rep": "BV", "area": "BV1"}, {"accno": "KS029", "net": 3721847.38, "store": "Patels Hardware", "rep": "BV", "area": "BV3"}, {"accno": "KP005", "net": 3629916.68, "store": "Patel (Nkomazi Imp. & Exp. CC)", "rep": "BV", "area": "BV2"}, {"accno": "KH021", "net": 2720955.56, "store": "Ebrahim Abramjee Traders CC", "rep": "AC", "area": "AC3"}, {"accno": "KM127", "net": 2491661.6, "store": "Myka Trade 2 T A New Builders", "rep": "BV", "area": "BV3"}, {"accno": "KE005", "net": 2160781.91, "store": "Easy Build Hardware", "rep": "NP", "area": "NP1"}, {"accno": "KM071", "net": 2000772.28, "store": "Inyameko Trading 1605cc", "rep": "NP", "area": "NP4"}, {"accno": "KS004", "net": 1972254.31, "store": "S.E.Z. Superette", "rep": "BV", "area": "BV1"}], "2026": [{"accno": "KB011", "net": 2539616.85, "store": "Brits Hardware & Glass", "rep": "BV", "area": "BV1"}, {"accno": "KK021", "net": 1320246.22, "store": "Kit Kat Group (Pty) Ltd", "rep": "NP", "area": "NP1"}, {"accno": "KS019", "net": 963521.02, "store": "S.I. Hardware", "rep": "NP", "area": "NP4"}, {"accno": "KH021", "net": 716065.35, "store": "Ebrahim Abramjee Traders CC", "rep": "AC", "area": "AC1"}, {"accno": "KH035", "net": 687494.0, "store": "HGM Steelboys CC", "rep": "BV", "area": "BV3"}, {"accno": "KM027", "net": 599932.16, "store": "Jane Furse Building Supply", "rep": "BP", "area": ""}, {"accno": "KP005", "net": 537176.71, "store": "Patel (Nkomazi Imp. & Exp. CC)", "rep": "BV", "area": "BV2"}, {"accno": "KW004", "net": 535477.5, "store": "Buildware ta Siam Trading", "rep": "BV", "area": "BV4"}, {"accno": "KM127", "net": 521942.02, "store": "Myka Trade 2  Mankweng", "rep": "BV", "area": "BV3"}, {"accno": "KD001", "net": 484715.37, "store": "Dainty's Wholesale Hardware", "rep": "BV", "area": "BV1"}, {"accno": "KM071", "net": 479588.94, "store": "Inyameko Trading 1605cc", "rep": "NP", "area": "NP4"}, {"accno": "KE005", "net": 455136.68, "store": "Easy Build Hardware", "rep": "NP", "area": "NP1"}, {"accno": "KB100", "net": 385841.58, "store": "Builders Direct Depot Pty Ltd", "rep": "NP", "area": "NP2"}, {"accno": "KS004", "net": 383749.67, "store": "S.E.Z. Superette", "rep": "BV", "area": "BV1"}, {"accno": "KD008", "net": 333020.29, "store": "Dada's World of Hardware CC", "rep": "BV", "area": "BV3"}]}, "available_months": [{"year": 2024, "month": 3}, {"year": 2024, "month": 4}, {"year": 2024, "month": 5}, {"year": 2024, "month": 6}, {"year": 2024, "month": 7}, {"year": 2024, "month": 8}, {"year": 2024, "month": 9}, {"year": 2024, "month": 10}, {"year": 2024, "month": 11}, {"year": 2024, "month": 12}, {"year": 2025, "month": 1}, {"year": 2025, "month": 2}, {"year": 2025, "month": 3}, {"year": 2025, "month": 4}, {"year": 2025, "month": 5}, {"year": 2025, "month": 6}, {"year": 2025, "month": 7}, {"year": 2025, "month": 8}, {"year": 2025, "month": 9}, {"year": 2025, "month": 10}, {"year": 2025, "month": 11}, {"year": 2025, "month": 12}, {"year": 2026, "month": 1}, {"year": 2026, "month": 2}, {"year": 2026, "month": 3}, {"year": 2026, "month": 4}, {"year": 2026, "month": 5}], "partial_months": [{"year": 2026, "month": 5, "through_day": 4}], "target_growth": 1.3};
+
+// ── Chart defaults ────────────────────────────────────────────────────────────
+Chart.defaults.font.family = "'Segoe UI', system-ui, sans-serif";
+Chart.defaults.font.size = 12;
+Chart.defaults.color = '#6B7280';
+const GRID = {color:'rgba(0,0,0,0.06)'};
+const O='#E85D04',R='#E63946',G='#2DC653',A='#F4A261',T='#2EC4B6',B='#457B9D';
+
+// ── Helpers ───────────────────────────────────────────────────────────────────
+function fmtR(v) {
+  if (v === null || v === undefined || isNaN(v)) return '—';
+  if (Math.abs(v) >= 1e6) return 'R' + (v/1e6).toFixed(2) + 'M';
+  if (Math.abs(v) >= 1e3) return 'R' + (v/1e3).toFixed(1) + 'K';
+  return 'R' + v.toFixed(0);
+}
+function pctStr(v, forceSign=true) {
+  if (v === null || v === undefined || isNaN(v)) return '—';
+  const s = forceSign && v >= 0 ? '+' : '';
+  return s + v.toFixed(1) + '%';
+}
+function safePct(a, b) {
+  return (b && b !== 0) ? (a - b) / b * 100 : null;
+}
+function growthPill(pct) {
+  if (pct === null || pct === undefined || isNaN(pct)) return '<span class="pill neutral">—</span>';
+  const cls = pct >= 30 ? 'green' : pct >= 0 ? 'amber' : 'red';
+  const sign = pct >= 0 ? '+' : '';
+  return `<span class="pill ${cls}">${sign}${pct.toFixed(1)}%</span>`;
+}
+function getMC(y, m) {
+  return DATA.monthly_company[y]?.[m]?.net || 0;
+}
+function getMR(rep, y, m) {
+  return DATA.monthly_rep[rep]?.[y]?.[m] || 0;
+}
+
+// ── Tab switching ─────────────────────────────────────────────────────────────
+let chartsInited = {};
+function showTab(id) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('panel-' + id).classList.add('active');
+  document.querySelector(`[data-tab="${id}"]`).classList.add('active');
+  if (!chartsInited[id]) { initChartsFor(id); chartsInited[id] = true; }
+}
+
+function initChartsFor(id) {
+  if (id === 'yoy')     initYOYCharts();
+  if (id === 'fy2025')  initFY25Charts();
+  if (id === 'monthly') renderMonthlyTab();
+}
+
+// ── YOY Charts ────────────────────────────────────────────────────────────────
+function initYOYCharts() {
+  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  const s24 = [0.0, 0.0, 9.296, 8.442, 10.518, 9.356, 10.393, 12.057, 11.071, 12.097, 14.978, 17.061];
+  const s25 = [7.174, 7.717, 9.575, 9.916, 9.13, 9.553, 12.114, 12.032, 12.753, 16.022, 15.623, 18.315];
+  const s26 = [6.756, 9.824, 10.165, 12.445, 0.645, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0];
+  const g25 = [null,null,3.0,17.5,-13.2,2.1,16.6,-0.2,15.2,32.4,4.3,7.3];
+  const g26 = [-5.8,27.3,6.2,25.5,-92.9,-100.0,-100.0,-100.0,-100.0,-100.0,-100.0,-100.0];
+
+  new Chart(document.getElementById('cYOYLine'), {
+    type:'line',
+    data:{labels:months, datasets:[
+      {label:'2024', data:s24, borderColor:'rgba(107,114,128,0.4)', borderDash:[5,4], fill:false, tension:0.3, pointRadius:4, borderWidth:2},
+      {label:'2025', data:s25, borderColor:'rgba(107,114,128,0.8)', fill:false, tension:0.3, pointRadius:4, borderWidth:2},
+      {label:'2026', data:s26, borderColor:O, fill:false, tension:0.3, pointRadius:5, borderWidth:2.5},
+    ]},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{position:'bottom'},tooltip:{callbacks:{label:c=>'R'+(c.parsed.y*1e6/1e6).toFixed(2)+'M'}}},
+      scales:{y:{grid:GRID,ticks:{callback:v=>'R'+v.toFixed(1)+'M'}},x:{grid:{display:false}}}
+    }
+  });
+
+  new Chart(document.getElementById('cYOYGrowth'), {
+    type:'bar',
+    data:{labels:months, datasets:[
+      {label:'2025 vs 2024', data:g25, backgroundColor:g25.map(v=>v===null?'transparent':v>=30?G+'AA':v>=0?A+'AA':R+'AA'), borderRadius:4},
+      {label:'2026 vs 2025', data:g26, backgroundColor:g26.map(v=>v===null?'transparent':v>=30?G+'44':v>=0?A+'44':R+'44'), borderRadius:4, borderColor:g26.map(v=>v===null?'transparent':v>=30?G:v>=0?A:R), borderWidth:1},
+    ]},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{position:'bottom'},tooltip:{callbacks:{label:c=>c.parsed.y?.toFixed(1)+'%'}}},
+      scales:{y:{grid:GRID,ticks:{callback:v=>v+'%'}},x:{grid:{display:false}}}
+    }
+  });
+}
+
+// ── FY2025 Charts ─────────────────────────────────────────────────────────────
+function initFY25Charts() {
+  const fy25Labels = ["Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec","Jan","Feb"];
+  new Chart(document.getElementById('cFY25Monthly'), {
+    type:'bar',
+    data:{labels:fy25Labels, datasets:[{label:"Bhadresh Vallabh",data:[3.765, 3.863, 4.253, 4.023, 5.355, 4.727, 5.974, 7.951, 6.938, 7.009, 2.099, 3.724],backgroundColor:"#E85D04CC",borderRadius:4},{label:"Nikhil Panchal",data:[3.625, 3.586, 3.502, 3.355, 3.906, 4.276, 3.793, 4.331, 5.02, 7.448, 3.289, 4.039],backgroundColor:"#2EC4B6CC",borderRadius:4},{label:"Amit Patel",data:[0.695, 0.97, 0.553, 0.92, 1.13, 1.392, 1.229, 1.331, 2.283, 1.848, 0.785, 0.676],backgroundColor:"#457B9DCC",borderRadius:4},{label:"Aboo Cassim",data:[1.412, 0.874, 1.111, 1.107, 1.347, 1.241, 1.45, 1.986, 1.237, 1.672, 0.767, 1.151],backgroundColor:"#2DC653CC",borderRadius:4},{label:"Byron Minnie",data:[0.0, 0.0, 0.0, 0.001, 0.004, 0.146, 0.009, 0.032, 0.012, 0.001, 0.002, 0.004],backgroundColor:"#E63946CC",borderRadius:4}]},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{position:'bottom',labels:{padding:12,boxWidth:12}},
+        tooltip:{callbacks:{label:c=>'R'+(c.parsed.y*1e6).toLocaleString('en-ZA')}}},
+      scales:{
+        x:{stacked:true,grid:{display:false}},
+        y:{stacked:true,grid:GRID,ticks:{callback:v=>'R'+v.toFixed(1)+'M'}}
+      }
+    }
+  });
+}
+
+// ── Monthly View ──────────────────────────────────────────────────────────────
+let curY = 2026, curM = 4;   // default: April 2026
+
+function renderMonthlyTab() {
+  const y = curY, m = curM;
+  const ml = DATA.month_labels[String(m)] + ' ' + y;
+  document.getElementById('monthLabel').textContent = ml;
+
+  // Sync dropdown
+  const sel = document.getElementById('monthSelect');
+  const key = y + '-' + m;
+  for (let opt of sel.options) { if (opt.value === key) { sel.value = key; break; } }
+
+  // Partial badge
+  const isPartial = DATA.partial_months.some(p => p.year === y && p.month === m);
+  document.getElementById('partialBadge').style.display = isPartial ? '' : 'none';
+
+  // Company data for this month across 3 years
+  const co24 = getMC(2024, m), co25 = getMC(2025, m), co26 = getMC(2026, m);
+  const t25  = co24 * 1.30, t26 = co25 * 1.30;
+  const g25  = safePct(co25, co24), g26 = safePct(co26, co25);
+
+  // Company KPI cards
+  document.getElementById('monthlyKpis').innerHTML = `
+    <div class="kpi">
+      <div class="kpi-label">${DATA.month_labels[m]} 2024</div>
+      <div class="kpi-value">${fmtR(co24)}</div>
+      <div class="kpi-delta neu">Baseline year</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">${DATA.month_labels[m]} 2025</div>
+      <div class="kpi-value">${fmtR(co25)}</div>
+      <div class="kpi-delta neu">Target: ${fmtR(t25)}</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Growth 25 vs 24</div>
+      <div class="kpi-value">${pctStr(g25)}</div>
+      <div class="kpi-delta ${g25 !== null && g25 >= 30 ? 'up' : g25 !== null && g25 >= 0 ? 'warn' : 'dn'}">${growthPill(g25)}</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">${DATA.month_labels[m]} 2026</div>
+      <div class="kpi-value">${fmtR(co26)}</div>
+      <div class="kpi-delta neu">Target: ${fmtR(t26)}</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Growth 26 vs 25</div>
+      <div class="kpi-value">${pctStr(g26)}</div>
+      <div class="kpi-delta ${g26 !== null && g26 >= 30 ? 'up' : g26 !== null && g26 >= 0 ? 'warn' : 'dn'}">${growthPill(g26)}</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">2026 vs Target</div>
+      <div class="kpi-value">${pctStr(safePct(co26, t26))}</div>
+      <div class="kpi-delta ${co26 >= t26 ? 'up' : 'dn'}">${co26 >= t26 ? '&#9650; Hit target' : '&#9660; Below target'}</div>
+    </div>`;
+
+  // Rep table
+  let rows = '';
+  for (const rep of DATA.reps) {
+    const r24 = getMR(rep, 2024, m);
+    const r25 = getMR(rep, 2025, m);
+    const r26 = getMR(rep, 2026, m);
+    const rt25 = r24 * 1.30, rt26 = r25 * 1.30;
+    const rg25 = safePct(r25, r24), rg26 = safePct(r26, r25);
+    const rowCls = rg26 === null ? '' : rg26 >= 30 ? 'row-green' : rg26 >= 0 ? 'row-amber' : 'row-red';
+    rows += `<tr class="${rowCls}">
+      <td><strong>${rep}</strong><br><small style="color:var(--muted)">${DATA.rep_names[rep]}</small></td>
+      <td class="num">${fmtR(r24)}</td>
+      <td class="num">${fmtR(r25)}</td>
+      <td class="num">${growthPill(rg25)}</td>
+      <td class="num"><small style="color:var(--muted)">${fmtR(rt25)}</small></td>
+      <td class="num">${fmtR(r26)}</td>
+      <td class="num">${growthPill(rg26)}</td>
+      <td class="num"><small style="color:var(--muted)">${fmtR(rt26)}</small></td>
+    </tr>`;
+  }
+  // Company total row
+  rows += `<tr style="font-weight:700;background:#f8f8f4">
+    <td><strong>TOTAL</strong></td>
+    <td class="num">${fmtR(co24)}</td>
+    <td class="num">${fmtR(co25)}</td>
+    <td class="num">${growthPill(g25)}</td>
+    <td class="num"><small style="color:var(--muted)">${fmtR(t25)}</small></td>
+    <td class="num">${fmtR(co26)}</td>
+    <td class="num">${growthPill(g26)}</td>
+    <td class="num"><small style="color:var(--muted)">${fmtR(t26)}</small></td>
+  </tr>`;
+  document.getElementById('monthlyRepTbody').innerHTML = rows;
+
+  // Trend chart — last 12 calendar months up to and including selected month
+  renderTrendChart(y, m);
+}
+
+let trendChart = null;
+function renderTrendChart(toY, toM) {
+  // Build last 12 months sequence
+  const labels = [], vals = [];
+  let ty = toY, tm = toM;
+  for (let i = 11; i >= 0; i--) {
+    let pm = toM - i; let py = toY;
+    while (pm <= 0) { pm += 12; py--; }
+    labels.push(DATA.month_labels[String(pm)] + ' ' + String(py).slice(2));
+    vals.push(getMC(py, pm) / 1e6);
+  }
+  if (trendChart) { trendChart.destroy(); }
+  trendChart = new Chart(document.getElementById('cMonthTrend'), {
+    type:'bar',
+    data:{labels, datasets:[{
+      label:'Net Revenue (Rm)', data:vals,
+      backgroundColor: vals.map((_,i) => i === 11 ? O : O+'66'),
+      borderRadius:6
+    }]},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>'R'+c.parsed.y.toFixed(2)+'M'}}},
+      scales:{y:{grid:GRID,ticks:{callback:v=>'R'+v.toFixed(1)+'M'}},x:{grid:{display:false}}}
+    }
+  });
+}
+
+// Navigation helpers
+const AVAIL = DATA.available_months.map(a => `${a.year}-${a.month}`);
+function isAvail(y, m) { return AVAIL.includes(`${y}-${m}`); }
+
+function prevMonth() {
+  let m = curM - 1, y = curY;
+  if (m < 1) { m = 12; y--; }
+  if (isAvail(y, m)) { curY = y; curM = m; renderMonthlyTab(); }
+}
+function nextMonth() {
+  let m = curM + 1, y = curY;
+  if (m > 12) { m = 1; y++; }
+  if (isAvail(y, m)) { curY = y; curM = m; renderMonthlyTab(); }
+}
+function jumpToMonth(val) {
+  const parts = val.split('-');
+  curY = parseInt(parts[0]); curM = parseInt(parts[1]);
+  renderMonthlyTab();
+}
+
+// ── Init ──────────────────────────────────────────────────────────────────────
+showTab('yoy');
+
+</script>
+</body>
+</html>
