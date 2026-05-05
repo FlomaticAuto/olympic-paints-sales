@@ -1757,7 +1757,7 @@
 
   <div style="margin-bottom:20px;display:flex;gap:8px;align-items:center;flex-wrap:wrap">
     <span style="color:var(--muted);font-size:0.85em;margin-right:4px">Period:</span>
-    <button class="act-filter-btn" data-key="2026-01" onclick="setActivityFilter('2026-01')" style="padding:5px 14px;border:1px solid var(--border);background:transparent;color:var(--text);border-radius:6px;cursor:pointer;font-size:0.85em">Jan 2026</button><button class="act-filter-btn" data-key="2026-02" onclick="setActivityFilter('2026-02')" style="padding:5px 14px;border:1px solid var(--border);background:transparent;color:var(--text);border-radius:6px;cursor:pointer;font-size:0.85em">Feb 2026</button><button class="act-filter-btn" data-key="2026-03" onclick="setActivityFilter('2026-03')" style="padding:5px 14px;border:1px solid var(--border);background:transparent;color:var(--text);border-radius:6px;cursor:pointer;font-size:0.85em">Mar 2026</button><button class="act-filter-btn" data-key="2026-04" onclick="setActivityFilter('2026-04')" style="padding:5px 14px;border:1px solid var(--border);background:transparent;color:var(--text);border-radius:6px;cursor:pointer;font-size:0.85em">Apr 2026</button><button class="act-filter-btn" data-key="ytd" onclick="setActivityFilter('ytd')" style="padding:5px 14px;border:1px solid var(--orange);background:var(--orange);color:var(--black);border-radius:6px;cursor:pointer;font-size:0.85em;font-weight:600">YTD</button>
+    <button class="act-filter-btn" data-key="2026-01" onclick="setActivityFilter('2026-01')" style="padding:5px 14px;border:1px solid var(--border);background:transparent;color:var(--text);border-radius:6px;cursor:pointer;font-size:0.85em">Jan 2026</button><button class="act-filter-btn" data-key="2026-02" onclick="setActivityFilter('2026-02')" style="padding:5px 14px;border:1px solid var(--border);background:transparent;color:var(--text);border-radius:6px;cursor:pointer;font-size:0.85em">Feb 2026</button><button class="act-filter-btn" data-key="2026-03" onclick="setActivityFilter('2026-03')" style="padding:5px 14px;border:1px solid var(--border);background:transparent;color:var(--text);border-radius:6px;cursor:pointer;font-size:0.85em">Mar 2026</button><button class="act-filter-btn" data-key="2026-04" onclick="setActivityFilter('2026-04')" style="padding:5px 14px;border:1px solid var(--border);background:transparent;color:var(--text);border-radius:6px;cursor:pointer;font-size:0.85em">Apr 2026</button><button class="act-filter-btn" data-key="2026-05" onclick="setActivityFilter('2026-05')" style="padding:5px 14px;border:1px solid var(--border);background:transparent;color:var(--text);border-radius:6px;cursor:pointer;font-size:0.85em">May 2026</button><button class="act-filter-btn" data-key="ytd" onclick="setActivityFilter('ytd')" style="padding:5px 14px;border:1px solid var(--orange);background:var(--orange);color:var(--black);border-radius:6px;cursor:pointer;font-size:0.85em;font-weight:600">YTD</button>
   </div>
 
   <div class="kpi-grid" style="margin-bottom:24px">
@@ -2491,8 +2491,8 @@ function setActivityFilter(key) {
   const leadsTotal = leadsVals.reduce((a, b) => a + b, 0);
 
   // Period label
-  const allKeys   = ["2026-01", "2026-02", "2026-03", "2026-04"];
-  const allLabels = ["Jan 2026", "Feb 2026", "Mar 2026", "Apr 2026"];
+  const allKeys   = ["2026-01", "2026-02", "2026-03", "2026-04", "2026-05"];
+  const allLabels = ["Jan 2026", "Feb 2026", "Mar 2026", "Apr 2026", "May 2026"];
   const mLabel = isYtd ? 'YTD' : allLabels[allKeys.indexOf(key)];
 
   // KPI cards
