@@ -2566,12 +2566,20 @@ function initStockCharts() {
   const pva25 = [142.7, 151.2, 148.2, 169.6, 246.7, 193.3, 199.1, 237.3, 318.7, 359.7, 114.5, 158.6];
   const pva26 = [118.7, 224.9, 7.1, null, null, null, null, null, null, null, null, null];
 
-  new Chart(document.getElementById('cPVALine'), {
+  const pvaCv  = document.getElementById('cPVALine');
+  const pvaCtx = pvaCv.getContext('2d');
+  function pvaGrad(r, g, b, topA) {
+    const gr = pvaCtx.createLinearGradient(0, 0, 0, 300);
+    gr.addColorStop(0, `rgba(${r},${g},${b},${topA})`);
+    gr.addColorStop(1, `rgba(${r},${g},${b},0)`);
+    return gr;
+  }
+  new Chart(pvaCv, {
     type:'line',
     data:{labels:fyMonths, datasets:[
-      {label:'FY2024', data:pva24, borderColor:'rgba(148,147,144,0.4)', borderDash:[5,4], fill:false, tension:0.3, pointRadius:3, borderWidth:1.5},
-      {label:'FY2025', data:pva25, borderColor:T, fill:false, tension:0.3, pointRadius:4, borderWidth:2},
-      {label:'FY2026', data:pva26, borderColor:O, fill:false, tension:0.3, pointRadius:5, borderWidth:2.5, spanGaps:false},
+      {label:'FY2024', data:pva24, borderColor:'rgba(148,147,144,0.4)', backgroundColor:pvaGrad(148,147,144,0.12), borderDash:[5,4], fill:true, tension:0.3, pointRadius:3, borderWidth:1.5},
+      {label:'FY2025', data:pva25, borderColor:T, backgroundColor:pvaGrad(45,184,168,0.25), fill:true, tension:0.3, pointRadius:4, borderWidth:2},
+      {label:'FY2026', data:pva26, borderColor:O, backgroundColor:pvaGrad(245,196,0,0.5), fill:true, tension:0.3, pointRadius:5, borderWidth:2.5, spanGaps:false},
     ]},
     options:{responsive:true, maintainAspectRatio:false,
       plugins:{legend:{position:'bottom'}, tooltip:{callbacks:{label:c=>c.parsed.y == null ? '' : `${c.dataset.label}: ${c.parsed.y.toFixed(1)}K L`}}},
@@ -2584,12 +2592,20 @@ function initStockCharts() {
   const en25 = [50.8, 50.6, 51.9, 61.2, 68.0, 76.7, 82.9, 107.9, 80.6, 120.7, 34.7, 52.5];
   const en26 = [71.8, 58.7, 2.4, null, null, null, null, null, null, null, null, null];
 
-  new Chart(document.getElementById('cEnamelLine'), {
+  const enCv  = document.getElementById('cEnamelLine');
+  const enCtx = enCv.getContext('2d');
+  function enGrad(r, g, b, topA) {
+    const gr = enCtx.createLinearGradient(0, 0, 0, 300);
+    gr.addColorStop(0, `rgba(${r},${g},${b},${topA})`);
+    gr.addColorStop(1, `rgba(${r},${g},${b},0)`);
+    return gr;
+  }
+  new Chart(enCv, {
     type:'line',
     data:{labels:fyMonths, datasets:[
-      {label:'FY2024', data:en24, borderColor:'rgba(148,147,144,0.4)', borderDash:[5,4], fill:false, tension:0.3, pointRadius:3, borderWidth:1.5},
-      {label:'FY2025', data:en25, borderColor:O, fill:false, tension:0.3, pointRadius:4, borderWidth:2},
-      {label:'FY2026', data:en26, borderColor:G, fill:false, tension:0.3, pointRadius:5, borderWidth:2.5, spanGaps:false},
+      {label:'FY2024', data:en24, borderColor:'rgba(148,147,144,0.4)', backgroundColor:enGrad(148,147,144,0.12), borderDash:[5,4], fill:true, tension:0.3, pointRadius:3, borderWidth:1.5},
+      {label:'FY2025', data:en25, borderColor:O, backgroundColor:enGrad(245,196,0,0.25), fill:true, tension:0.3, pointRadius:4, borderWidth:2},
+      {label:'FY2026', data:en26, borderColor:G, backgroundColor:enGrad(45,140,122,0.5), fill:true, tension:0.3, pointRadius:5, borderWidth:2.5, spanGaps:false},
     ]},
     options:{responsive:true, maintainAspectRatio:false,
       plugins:{legend:{position:'bottom'}, tooltip:{callbacks:{label:c=>c.parsed.y == null ? '' : `${c.dataset.label}: ${c.parsed.y.toFixed(1)}K L`}}},
