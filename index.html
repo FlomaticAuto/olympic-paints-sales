@@ -138,6 +138,7 @@
   <button class="tab-btn"        data-tab="debtors"  onclick="showTab('debtors')">Debtors</button>
   <button class="tab-btn"        data-tab="pricing"  onclick="showTab('pricing')">Price Analysis</button>
   <button class="tab-btn"        data-tab="activity" onclick="showTab('activity')">Activity</button>
+  <button class="tab-btn"        data-tab="stock"    onclick="showTab('stock')">Stock Statistics</button>
 </div>
 
 <div class="main">
@@ -1791,6 +1792,118 @@
 
 </div><!-- /activity -->
 
+<!-- ═══════════════════════════════════════ TAB 9: STOCK STATISTICS -->
+<div id="panel-stock" class="tab-panel">
+
+  <div class="stitle">Paint Volume KPIs — Net Litres (Invoices minus Credit Notes)</div>
+  <div class="kpi-grid">
+    <div class="kpi">
+      <div class="kpi-label">FY2025 PVA Volume</div>
+      <div class="kpi-value" style="color:var(--teal)">2.44M L</div>
+      <div class="kpi-bar"><div class="kpi-bar-fill" style="width:97%;background:var(--teal)"></div></div>
+      <div class="kpi-delta dn">▼ -2.7% vs FY2024 · 2.51M L baseline</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">FY2025 Enamel Volume</div>
+      <div class="kpi-value" style="color:var(--orange)">838.5K L</div>
+      <div class="kpi-bar"><div class="kpi-bar-fill" style="width:100%;background:var(--orange)"></div></div>
+      <div class="kpi-delta up">▲ +9.3% vs FY2024 · 766.8K L baseline</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">FY2025 PVA + Enamel</div>
+      <div class="kpi-value">3.28M L</div>
+      <div class="kpi-bar"><div class="kpi-bar-fill" style="width:100%;background:var(--gold)"></div></div>
+      <div class="kpi-delta warn">▲ +0.2% vs FY2024 · 3.27M L baseline</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">FY2026 YTD PVA (3 months)</div>
+      <div class="kpi-value" style="color:var(--red)">350.7K L</div>
+      <div class="kpi-bar"><div class="kpi-bar-fill" style="width:79%;background:var(--red)"></div></div>
+      <div class="kpi-delta dn">▼ -20.6% vs FY2025 same 3 months (442.1K L)</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">FY2026 YTD Enamel (3 months)</div>
+      <div class="kpi-value" style="color:var(--amber)">133.0K L</div>
+      <div class="kpi-bar"><div class="kpi-bar-fill" style="width:87%;background:var(--amber)"></div></div>
+      <div class="kpi-delta dn">▼ -13.2% vs FY2025 same 3 months (153.3K L)</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">FY2026 YTD Combined (3 months)</div>
+      <div class="kpi-value" style="color:var(--red)">483.7K L</div>
+      <div class="kpi-bar"><div class="kpi-bar-fill" style="width:81%;background:var(--red)"></div></div>
+      <div class="kpi-delta dn">▼ -18.7% vs FY2025 same 3 months (595.4K L)</div>
+    </div>
+  </div>
+
+  <div class="stitle">FY Volume Comparison — PVA vs Enamel vs QD Enamel</div>
+  <div class="card full">
+    <div class="card-title">Net Litres by Financial Year</div>
+    <div class="card-sub">FY2026 is 3 months YTD only (Mar–May 2026 partial) · Sizes extracted from product names (20L, 5L, 1L etc.)</div>
+    <div class="chart-wrap h320"><canvas id="cStockFY"></canvas></div>
+  </div>
+
+  <div class="stitle">Monthly Volume Trend — Financial Year (Mar → Feb)</div>
+  <div class="g2">
+    <div class="card">
+      <div class="card-title">PVA Paints — Monthly Net Litres</div>
+      <div class="card-sub">FY2024 (dashed) · FY2025 · FY2026 YTD</div>
+      <div class="chart-wrap h300"><canvas id="cPVALine"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="card-title">Enamel — Monthly Net Litres</div>
+      <div class="card-sub">FY2024 (dashed) · FY2025 · FY2026 YTD</div>
+      <div class="chart-wrap h300"><canvas id="cEnamelLine"></canvas></div>
+    </div>
+  </div>
+
+  <div class="stitle">Top Products by Volume — FY2025 Full Year</div>
+  <div class="g2">
+    <div class="card">
+      <div class="card-title">Top 10 PVA Products</div>
+      <div class="card-sub">Ranked by net litres sold · FY2025 (Mar 2025 – Feb 2026)</div>
+      <div class="tw">
+        <table>
+          <thead><tr><th>#</th><th>Product</th><th class="num">Net Litres</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>20L DECOR WHITE PVA</td><td class="num">285,620 L</td></tr>
+            <tr><td>2</td><td>20L ECLIPSE WHITE PVA</td><td class="num">170,180 L</td></tr>
+            <tr><td>3</td><td>20L DECOR CHESTNUT PVA</td><td class="num">149,180 L</td></tr>
+            <tr><td>4</td><td>20LT DECOR DARK GREY PVA</td><td class="num">147,360 L</td></tr>
+            <tr><td>5</td><td>20L DECOR KIWI PVA</td><td class="num">146,080 L</td></tr>
+            <tr><td>6</td><td>20L DECOR CREAM PVA</td><td class="num">121,640 L</td></tr>
+            <tr><td>7</td><td>20L DECOR SILVER MIST PVA</td><td class="num">107,480 L</td></tr>
+            <tr><td>8</td><td>20L DECOR NIGHT SKY PVA</td><td class="num">101,500 L</td></tr>
+            <tr><td>9</td><td>20L MADALA'S CHOICE WHITE PVA</td><td class="num">90,340 L</td></tr>
+            <tr><td>10</td><td>20L ECLIPSE CREAM PVA</td><td class="num">87,660 L</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Top 10 Enamel Products</div>
+      <div class="card-sub">Ranked by net litres sold · FY2025 (Mar 2025 – Feb 2026)</div>
+      <div class="tw">
+        <table>
+          <thead><tr><th>#</th><th>Product</th><th class="num">Net Litres</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>5L HIGH GLOSS (MQ) BLACK</td><td class="num">95,515 L</td></tr>
+            <tr><td>2</td><td>5L HIGH GLOSS (MQ) WHITE</td><td class="num">81,030 L</td></tr>
+            <tr><td>3</td><td>5L HIGH GLOSS (MQ) GREY</td><td class="num">80,870 L</td></tr>
+            <tr><td>4</td><td>1L HIGH GLOSS (MQ) BLACK</td><td class="num">51,740 L</td></tr>
+            <tr><td>5</td><td>5L HIGH GLOSS (MQ) G BROWN</td><td class="num">49,530 L</td></tr>
+            <tr><td>6</td><td>5L HIGH GLOSS (MQ) BURGANDY</td><td class="num">43,835 L</td></tr>
+            <tr><td>7</td><td>5L HIGH GLOSS (M/Q) S/RED</td><td class="num">40,770 L</td></tr>
+            <tr><td>8</td><td>5L HIGH GLOSS (MQ) P BROWN</td><td class="num">35,685 L</td></tr>
+            <tr><td>9</td><td>5L HIGH GLOSS (MQ) CREAM</td><td class="num">33,210 L</td></tr>
+            <tr><td>10</td><td>20L HIGH GLOSS (MQ) WHITE</td><td class="num">29,640 L</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /stock -->
+
 </div><!-- /main -->
 
 <footer>
@@ -1949,6 +2062,7 @@ function initChartsFor(id) {
   if (id === 'debtors')  initDebtorsCharts();
   if (id === 'pricing')  initPriceCharts();
   if (id === 'activity') initActivityCharts();
+  if (id === 'stock')    initStockCharts();
 }
 
 // ── YOY Charts ────────────────────────────────────────────────────────────────
@@ -2383,6 +2497,73 @@ function setActivityFilter(key) {
   document.getElementById('tLeadsBody').innerHTML = DATA.reps.map((r, i) =>
     `<tr><td>${rn[r]}</td><td style="text-align:center;font-weight:600">${leadsVals[i]}</td></tr>`
   ).join('');
+}
+
+// ── Stock Statistics Charts ───────────────────────────────────────────────────
+function initStockCharts() {
+  // FY grouped bar — values in thousands of litres (KL)
+  const fyPVA    = [2507.1, 2439.5, 350.7];
+  const fyEnamel = [766.8,  838.5,  133.0];
+  const fyQD     = [324.6,  376.0,   77.2];
+  const fyLabels = ['FY2024', 'FY2025', 'FY2026 YTD'];
+  const fmtKL = v => v >= 1000 ? (v/1000).toFixed(2)+'M L' : v.toFixed(1)+'K L';
+
+  new Chart(document.getElementById('cStockFY'), {
+    type:'bar',
+    data:{labels:fyLabels, datasets:[
+      {label:'PVA Paints', data:fyPVA,    backgroundColor:T+'CC', borderRadius:4},
+      {label:'Enamel',     data:fyEnamel, backgroundColor:O+'CC', borderRadius:4},
+      {label:'QD Enamel',  data:fyQD,     backgroundColor:B+'CC', borderRadius:4},
+    ]},
+    options:{responsive:true, maintainAspectRatio:false,
+      plugins:{
+        legend:{position:'bottom'},
+        tooltip:{callbacks:{label:c=>`${c.dataset.label}: ${fmtKL(c.parsed.y)}`}}
+      },
+      scales:{
+        x:{grid:{display:false}},
+        y:{grid:GRID, ticks:{callback:v => v >= 1000 ? (v/1000).toFixed(1)+'M L' : v+'K L'}}
+      }
+    }
+  });
+
+  const fyMonths = ['Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb'];
+
+  // PVA monthly — net litres in thousands (KL)
+  const pva24 = [189.1, 158.4, 190.8, 188.5, 197.8, 245.5, 222.4, 228.0, 312.4, 335.2, 116.1, 123.0];
+  const pva25 = [142.7, 151.2, 148.2, 169.6, 246.7, 193.3, 199.1, 237.3, 318.7, 359.7, 114.5, 158.6];
+  const pva26 = [118.7, 224.9, 7.1, null, null, null, null, null, null, null, null, null];
+
+  new Chart(document.getElementById('cPVALine'), {
+    type:'line',
+    data:{labels:fyMonths, datasets:[
+      {label:'FY2024', data:pva24, borderColor:'rgba(107,114,128,0.4)', borderDash:[5,4], fill:false, tension:0.3, pointRadius:3, borderWidth:1.5},
+      {label:'FY2025', data:pva25, borderColor:T, fill:false, tension:0.3, pointRadius:4, borderWidth:2},
+      {label:'FY2026', data:pva26, borderColor:O, fill:false, tension:0.3, pointRadius:5, borderWidth:2.5, spanGaps:false},
+    ]},
+    options:{responsive:true, maintainAspectRatio:false,
+      plugins:{legend:{position:'bottom'}, tooltip:{callbacks:{label:c=>c.parsed.y == null ? '' : `${c.dataset.label}: ${c.parsed.y.toFixed(1)}K L`}}},
+      scales:{y:{grid:GRID, ticks:{callback:v=>v+'K'}}, x:{grid:{display:false}}}
+    }
+  });
+
+  // Enamel monthly — net litres in thousands (KL), sourced from Product Categories_05052026.xlsx
+  const en24 = [50.0, 51.6, 73.5, 64.2, 63.8, 69.8, 61.5, 71.6, 79.8, 97.4, 33.6, 50.0];
+  const en25 = [50.8, 50.6, 51.9, 61.2, 68.0, 76.7, 82.9, 107.9, 80.6, 120.7, 34.7, 52.5];
+  const en26 = [71.8, 58.7, 2.4, null, null, null, null, null, null, null, null, null];
+
+  new Chart(document.getElementById('cEnamelLine'), {
+    type:'line',
+    data:{labels:fyMonths, datasets:[
+      {label:'FY2024', data:en24, borderColor:'rgba(107,114,128,0.4)', borderDash:[5,4], fill:false, tension:0.3, pointRadius:3, borderWidth:1.5},
+      {label:'FY2025', data:en25, borderColor:O, fill:false, tension:0.3, pointRadius:4, borderWidth:2},
+      {label:'FY2026', data:en26, borderColor:G, fill:false, tension:0.3, pointRadius:5, borderWidth:2.5, spanGaps:false},
+    ]},
+    options:{responsive:true, maintainAspectRatio:false,
+      plugins:{legend:{position:'bottom'}, tooltip:{callbacks:{label:c=>c.parsed.y == null ? '' : `${c.dataset.label}: ${c.parsed.y.toFixed(1)}K L`}}},
+      scales:{y:{grid:GRID, ticks:{callback:v=>v+'K'}}, x:{grid:{display:false}}}
+    }
+  });
 }
 
 // ── Init ──────────────────────────────────────────────────────────────────────
