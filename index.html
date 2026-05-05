@@ -124,16 +124,17 @@
     </div>
   </div>
   <div class="hdr-r">
-    <div class="hdr-gen">Generated 05 May 2026 11:29</div>
+    <div class="hdr-gen">Generated 05 May 2026 12:46</div>
   </div>
 </div>
 
 <!-- TAB BAR -->
 <div class="tab-bar">
-  <button class="tab-btn active" data-tab="yoy"     onclick="showTab('yoy')">YOY Overview</button>
-  <button class="tab-btn"        data-tab="fy2025"  onclick="showTab('fy2025')">FY2025 Full Year</button>
-  <button class="tab-btn"        data-tab="fy2026"  onclick="showTab('fy2026')">FY2026 YTD</button>
-  <button class="tab-btn"        data-tab="monthly" onclick="showTab('monthly')">Monthly View</button>
+  <button class="tab-btn active" data-tab="yoy"      onclick="showTab('yoy')">YOY Overview</button>
+  <button class="tab-btn"        data-tab="fy2025"   onclick="showTab('fy2025')">FY2025 Full Year</button>
+  <button class="tab-btn"        data-tab="fy2026"   onclick="showTab('fy2026')">FY2026 YTD</button>
+  <button class="tab-btn"        data-tab="monthly"  onclick="showTab('monthly')">Monthly View</button>
+  <button class="tab-btn"        data-tab="products" onclick="showTab('products')">Products</button>
 </div>
 
 <div class="main">
@@ -765,6 +766,420 @@
     </div>
   </div>
 
+  <div class="stitle">Rock Bottom Compliance — FY2026 YTD</div>
+  <div class="kpi-grid">
+    <div class="kpi">
+      <div class="kpi-label">Invoice Lines Above RB</div>
+      <div class="kpi-value" style="color:var(--green)">17,793</div>
+      <div class="kpi-bar"><div class="kpi-bar-fill" style="width:78%;background:var(--green)"></div></div>
+      <div class="kpi-delta up">78.0% of lines with RB price</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Invoice Lines Below RB</div>
+      <div class="kpi-value" style="color:var(--red)">5,006</div>
+      <div class="kpi-bar"><div class="kpi-bar-fill" style="width:22%;background:var(--red)"></div></div>
+      <div class="kpi-delta dn">22.0% sold below rock bottom</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Lines — No RB Price Set</div>
+      <div class="kpi-value" style="color:var(--muted)">438</div>
+      <div class="kpi-delta neu">Product not in RB pricing file</div>
+    </div>
+  </div>
+
+  <div class="g2" style="margin-top:18px">
+    <div class="card">
+      <div class="card-title">By Sales Rep — RB Compliance</div>
+      <div class="card-sub">Green ≥ 90% · Amber 70–89% · Red &lt; 70%</div>
+      <div class="tw">
+        <table>
+          <thead><tr><th>Rep</th><th class="num">Above RB</th><th class="num">Below RB</th><th class="num">Compliance</th></tr></thead>
+          <tbody>
+        <tr>
+          <td><strong>BV</strong><br><small style="color:var(--muted)">Bhadresh Vallabh</small></td>
+          <td class="num">4,196</td>
+          <td class="num">1,404</td>
+          <td class="num"><span class="pill amber">74.9%</span></td>
+        </tr>
+        <tr>
+          <td><strong>NP</strong><br><small style="color:var(--muted)">Nikhil Panchal</small></td>
+          <td class="num">7,861</td>
+          <td class="num">2,050</td>
+          <td class="num"><span class="pill amber">79.3%</span></td>
+        </tr>
+        <tr>
+          <td><strong>AP</strong><br><small style="color:var(--muted)">Amit Patel</small></td>
+          <td class="num">3,048</td>
+          <td class="num">334</td>
+          <td class="num"><span class="pill green">90.1%</span></td>
+        </tr>
+        <tr>
+          <td><strong>AC</strong><br><small style="color:var(--muted)">Aboo Cassim</small></td>
+          <td class="num">2,111</td>
+          <td class="num">1,178</td>
+          <td class="num"><span class="pill red">64.2%</span></td>
+        </tr>
+        <tr>
+          <td><strong>BM</strong><br><small style="color:var(--muted)">Byron Minnie</small></td>
+          <td class="num">66</td>
+          <td class="num">6</td>
+          <td class="num"><span class="pill green">91.7%</span></td>
+        </tr></tbody>
+        </table>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">By Category — RB Compliance</div>
+      <div class="card-sub">Sorted by most lines below RB</div>
+      <div class="tw">
+        <table>
+          <thead><tr><th>Category</th><th class="num">Above RB</th><th class="num">Below RB</th><th class="num">Compliance</th></tr></thead>
+          <tbody>
+        <tr>
+          <td>PVA Paints</td>
+          <td class="num">2,993</td>
+          <td class="num">1,329</td>
+          <td class="num"><span class="pill red">69.3%</span></td>
+        </tr>
+        <tr>
+          <td>Enamel</td>
+          <td class="num">5,138</td>
+          <td class="num">1,326</td>
+          <td class="num"><span class="pill amber">79.5%</span></td>
+        </tr>
+        <tr>
+          <td>Accessories</td>
+          <td class="num">1,030</td>
+          <td class="num">417</td>
+          <td class="num"><span class="pill amber">71.2%</span></td>
+        </tr>
+        <tr>
+          <td>Waterproofing</td>
+          <td class="num">1,179</td>
+          <td class="num">349</td>
+          <td class="num"><span class="pill amber">77.2%</span></td>
+        </tr>
+        <tr>
+          <td>QD Enamel</td>
+          <td class="num">2,102</td>
+          <td class="num">341</td>
+          <td class="num"><span class="pill amber">86.0%</span></td>
+        </tr>
+        <tr>
+          <td>General</td>
+          <td class="num">657</td>
+          <td class="num">327</td>
+          <td class="num"><span class="pill red">66.8%</span></td>
+        </tr>
+        <tr>
+          <td>Putty</td>
+          <td class="num">491</td>
+          <td class="num">320</td>
+          <td class="num"><span class="pill red">60.5%</span></td>
+        </tr>
+        <tr>
+          <td>Woodcare</td>
+          <td class="num">2,591</td>
+          <td class="num">300</td>
+          <td class="num"><span class="pill amber">89.6%</span></td>
+        </tr>
+        <tr>
+          <td>Floor & Roof Paints</td>
+          <td class="num">788</td>
+          <td class="num">186</td>
+          <td class="num"><span class="pill amber">80.9%</span></td>
+        </tr>
+        <tr>
+          <td>Primers</td>
+          <td class="num">710</td>
+          <td class="num">93</td>
+          <td class="num"><span class="pill amber">88.4%</span></td>
+        </tr>
+        <tr>
+          <td>Specialised Coatings</td>
+          <td class="num">114</td>
+          <td class="num">18</td>
+          <td class="num"><span class="pill amber">86.4%</span></td>
+        </tr></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="stitle" style="margin-top:24px">Products Most Frequently Sold Below RB — FY2026</div>
+  <div class="card full">
+    <div class="card-title">Below Rock Bottom — Top 20 by Frequency</div>
+    <div class="card-sub">Count = number of invoice lines below RB price (Mar–May 2026)</div>
+    <div class="tw">
+      <table>
+        <thead><tr><th>#</th><th>Code</th><th>Product</th><th>Category</th><th class="num">Lines Below RB</th><th class="num">Revenue</th></tr></thead>
+        <tbody>
+        <tr>
+          <td>1</td>
+          <td><strong>RGE009</strong></td>
+          <td>200mm x 10m Membrane</td>
+          <td>Accessories</td>
+          <td class="num">225</td>
+          <td class="num">R66.2K</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td><strong>5186</strong></td>
+          <td>5KG PUTTY</td>
+          <td>Putty</td>
+          <td class="num">97</td>
+          <td class="num">R194.0K</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td><strong>299825</strong></td>
+          <td>5L HIGH GLOSS (MQ) GREY</td>
+          <td>Enamel</td>
+          <td class="num">81</td>
+          <td class="num">R523.6K</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td><strong>299801</strong></td>
+          <td>5L HIGH GLOSS (MQ) WHITE</td>
+          <td>Enamel</td>
+          <td class="num">74</td>
+          <td class="num">R589.9K</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td><strong>527972</strong></td>
+          <td>24x500GM RED OXIDE</td>
+          <td>General</td>
+          <td class="num">71</td>
+          <td class="num">R77.6K</td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td><strong>299811</strong></td>
+          <td>5L HIGH GLOSS (MQ) CREAM</td>
+          <td>Enamel</td>
+          <td class="num">71</td>
+          <td class="num">R275.5K</td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td><strong>389856</strong></td>
+          <td>5L RAINPROOF BURGUNDY</td>
+          <td>Waterproofing</td>
+          <td class="num">69</td>
+          <td class="num">R185.1K</td>
+        </tr>
+        <tr>
+          <td>8</td>
+          <td><strong>299871</strong></td>
+          <td>5L HIGH GLOSS (M/Q) S/RED</td>
+          <td>Enamel</td>
+          <td class="num">69</td>
+          <td class="num">R309.8K</td>
+        </tr>
+        <tr>
+          <td>9</td>
+          <td><strong>5184</strong></td>
+          <td>10KG PUTTY</td>
+          <td>Putty</td>
+          <td class="num">68</td>
+          <td class="num">R91.6K</td>
+        </tr>
+        <tr>
+          <td>10</td>
+          <td><strong>389825</strong></td>
+          <td>5L RAINPROOF GREY</td>
+          <td>Waterproofing</td>
+          <td class="num">67</td>
+          <td class="num">R203.8K</td>
+        </tr>
+        <tr>
+          <td>11</td>
+          <td><strong>527921</strong></td>
+          <td>24x500GM OXIDE BLACK</td>
+          <td>General</td>
+          <td class="num">67</td>
+          <td class="num">R66.2K</td>
+        </tr>
+        <tr>
+          <td>12</td>
+          <td><strong>7298</strong></td>
+          <td>5LT THINNERS</td>
+          <td>Accessories</td>
+          <td class="num">61</td>
+          <td class="num">R406.0K</td>
+        </tr>
+        <tr>
+          <td>13</td>
+          <td><strong>5176</strong></td>
+          <td>24X1KG PUTTY</td>
+          <td>Putty</td>
+          <td class="num">61</td>
+          <td class="num">R70.8K</td>
+        </tr>
+        <tr>
+          <td>14</td>
+          <td><strong>RGE016</strong></td>
+          <td>75mm x 10m Membrane</td>
+          <td>Accessories</td>
+          <td class="num">54</td>
+          <td class="num">R2.0K</td>
+        </tr>
+        <tr>
+          <td>15</td>
+          <td><strong>419783</strong></td>
+          <td>1L DARK OAK VARNISH</td>
+          <td>Woodcare</td>
+          <td class="num">53</td>
+          <td class="num">R148.3K</td>
+        </tr>
+        <tr>
+          <td>16</td>
+          <td><strong>299831</strong></td>
+          <td>5L HIGH GLOSS (MQ) G BROWN</td>
+          <td>Enamel</td>
+          <td class="num">53</td>
+          <td class="num">R368.7K</td>
+        </tr>
+        <tr>
+          <td>17</td>
+          <td><strong>7289</strong></td>
+          <td>DOZEN 750ML LACQUER THINNERS</td>
+          <td>Accessories</td>
+          <td class="num">53</td>
+          <td class="num">R134.5K</td>
+        </tr>
+        <tr>
+          <td>18</td>
+          <td><strong>389875</strong></td>
+          <td>5L RAINPROOF RED</td>
+          <td>Waterproofing</td>
+          <td class="num">51</td>
+          <td class="num">R108.7K</td>
+        </tr>
+        <tr>
+          <td>19</td>
+          <td><strong>299856</strong></td>
+          <td>5L HIGH GLOSS (MQ) BURGANDY</td>
+          <td>Enamel</td>
+          <td class="num">51</td>
+          <td class="num">R274.6K</td>
+        </tr>
+        <tr>
+          <td>20</td>
+          <td><strong>389821</strong></td>
+          <td>5L RAINPROOF BLACK</td>
+          <td>Waterproofing</td>
+          <td class="num">49</td>
+          <td class="num">R84.5K</td>
+        </tr></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="stitle">Products Without Rock Bottom Price</div>
+  <div class="card full">
+    <div class="card-title">No RB Price Set — Top by Revenue (FY2026)</div>
+    <div class="card-sub">These products are excluded from the compliance count above</div>
+    <div class="tw">
+      <table>
+        <thead><tr><th>Code</th><th>Product</th><th>Category</th><th class="num">FY2026 Revenue</th></tr></thead>
+        <tbody>
+        <tr>
+          <td><strong>HPQD9822</strong></td>
+          <td>5LT HYPER STEEL Q.D BRONZE</td>
+          <td>QD Enamel</td>
+          <td class="num">R155.5K</td>
+        </tr>
+        <tr>
+          <td><strong>M9401</strong></td>
+          <td>20L MADALA'S CHOICE WHITE PVA</td>
+          <td>PVA Paints</td>
+          <td class="num">R105.2K</td>
+        </tr>
+        <tr>
+          <td><strong>HPQD9830</strong></td>
+          <td>5LT HYPER STEEL Q.D CHARCOAL</td>
+          <td>QD Enamel</td>
+          <td class="num">R80.5K</td>
+        </tr>
+        <tr>
+          <td><strong>HP119820</strong></td>
+          <td>5LT HYPER STEEL Q.D GRIP COAT BLACK</td>
+          <td>QD Enamel</td>
+          <td class="num">R69.6K</td>
+        </tr>
+        <tr>
+          <td><strong>HPQD9821</strong></td>
+          <td>5LT HYPER STEEL Q.D BLACK</td>
+          <td>QD Enamel</td>
+          <td class="num">R66.2K</td>
+        </tr>
+        <tr>
+          <td><strong>M9411</strong></td>
+          <td>20L MADALA'S CHOICE CREAM PVA</td>
+          <td>PVA Paints</td>
+          <td class="num">R55.7K</td>
+        </tr>
+        <tr>
+          <td><strong>HP369875</strong></td>
+          <td>5LT HYPER STEEL RED OXIDE PRIMER</td>
+          <td>QD Enamel</td>
+          <td class="num">R44.0K</td>
+        </tr>
+        <tr>
+          <td><strong>HPQD9838</strong></td>
+          <td>5LT HYPER STEEL Q.D GREY PRIMER</td>
+          <td>QD Enamel</td>
+          <td class="num">R35.0K</td>
+        </tr>
+        <tr>
+          <td><strong>HPQD9828</strong></td>
+          <td>5L HYPER STEEL Q.D GREY</td>
+          <td>QD Enamel</td>
+          <td class="num">R31.2K</td>
+        </tr>
+        <tr>
+          <td><strong>HPQD9801</strong></td>
+          <td>5LT HYPER STEEL Q.D WHITE</td>
+          <td>QD Enamel</td>
+          <td class="num">R18.8K</td>
+        </tr>
+        <tr>
+          <td><strong>379921</strong></td>
+          <td>200L BLACK WATER BASE OXIDE PRIMER</td>
+          <td>Primers</td>
+          <td class="num">R15.3K</td>
+        </tr>
+        <tr>
+          <td><strong>HPQD9722</strong></td>
+          <td>1LT HYPER STEEL Q.D BRONZE</td>
+          <td>QD Enamel</td>
+          <td class="num">R11.7K</td>
+        </tr>
+        <tr>
+          <td><strong>HPQD9891</strong></td>
+          <td>5LT HYPER STEEL Q.D SILVER</td>
+          <td>QD Enamel</td>
+          <td class="num">R11.4K</td>
+        </tr>
+        <tr>
+          <td><strong>HPQD9860</strong></td>
+          <td>5LT HYPER STEEL Q.D MATT BLACK</td>
+          <td>QD Enamel</td>
+          <td class="num">R11.2K</td>
+        </tr>
+        <tr>
+          <td><strong>HPQD9832</strong></td>
+          <td>5LT HYPER STEEL Q.D PWD BROWN</td>
+          <td>QD Enamel</td>
+          <td class="num">R10.8K</td>
+        </tr></tbody>
+      </table>
+    </div>
+  </div>
+
 </div><!-- /fy2026 -->
 
 
@@ -844,17 +1259,189 @@
 
 </div><!-- /monthly -->
 
+
+<!-- ═══════════════════════════════════════════════════ TAB 5: PRODUCTS -->
+<div id="panel-products" class="tab-panel">
+
+  <div class="stitle">Revenue by Product Category — FY2026 YTD</div>
+  <div class="g2">
+    <div class="card">
+      <div class="card-title">Category Split (Donut)</div>
+      <div class="card-sub">Net revenue by Category L1 — FY2026 Mar–May</div>
+      <div class="chart-wrap h320"><canvas id="cCatDonut"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="card-title">Category Revenue (Bar)</div>
+      <div class="card-sub">Sorted by net revenue — millions ZAR</div>
+      <div class="chart-wrap h320"><canvas id="cCatBar"></canvas></div>
+    </div>
+  </div>
+
+  <div class="stitle">Top 20 Products — FY2026 YTD</div>
+  <div class="card full">
+    <div class="card-title">Best-Selling Products by Net Revenue</div>
+    <div class="card-sub">FY2026 YTD (March–May 2026) · Category from product master</div>
+    <div class="tw">
+      <table>
+        <thead><tr><th>#</th><th>Code</th><th>Product</th><th>Category</th><th class="num">Net Revenue</th></tr></thead>
+        <tbody>
+        <tr>
+          <td>1</td>
+          <td><strong>QD9822</strong></td>
+          <td>5L Q D BRONZE ENAMEL</td>
+          <td>QD Enamel</td>
+          <td class="num">R1.71M</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td><strong>7298</strong></td>
+          <td>5LT THINNERS</td>
+          <td>Accessories</td>
+          <td class="num">R865.7K</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td><strong>299825</strong></td>
+          <td>5L HIGH GLOSS (MQ) GREY</td>
+          <td>Enamel</td>
+          <td class="num">R688.9K</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td><strong>299821</strong></td>
+          <td>5L HIGH GLOSS (MQ) BLACK</td>
+          <td>Enamel</td>
+          <td class="num">R657.5K</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td><strong>299801</strong></td>
+          <td>5L HIGH GLOSS (MQ) WHITE</td>
+          <td>Enamel</td>
+          <td class="num">R637.9K</td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td><strong>139401</strong></td>
+          <td>20L DECOR WHITE PVA</td>
+          <td>PVA Paints</td>
+          <td class="num">R522.9K</td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td><strong>QD9821</strong></td>
+          <td>5L Q D BLACK ENAMEL</td>
+          <td>QD Enamel</td>
+          <td class="num">R426.2K</td>
+        </tr>
+        <tr>
+          <td>8</td>
+          <td><strong>299831</strong></td>
+          <td>5L HIGH GLOSS (MQ) G BROWN</td>
+          <td>Enamel</td>
+          <td class="num">R365.4K</td>
+        </tr>
+        <tr>
+          <td>9</td>
+          <td><strong>299721</strong></td>
+          <td>1L HIGH GLOSS (MQ) BLACK</td>
+          <td>Enamel</td>
+          <td class="num">R358.7K</td>
+        </tr>
+        <tr>
+          <td>10</td>
+          <td><strong>389825</strong></td>
+          <td>5L RAINPROOF GREY</td>
+          <td>Waterproofing</td>
+          <td class="num">R356.2K</td>
+        </tr>
+        <tr>
+          <td>11</td>
+          <td><strong>299856</strong></td>
+          <td>5L HIGH GLOSS (MQ) BURGANDY</td>
+          <td>Enamel</td>
+          <td class="num">R347.9K</td>
+        </tr>
+        <tr>
+          <td>12</td>
+          <td><strong>299871</strong></td>
+          <td>5L HIGH GLOSS (M/Q) S/RED</td>
+          <td>Enamel</td>
+          <td class="num">R327.8K</td>
+        </tr>
+        <tr>
+          <td>13</td>
+          <td><strong>139430</strong></td>
+          <td>20LT DECOR DARK GREY PVA</td>
+          <td>PVA Paints</td>
+          <td class="num">R324.6K</td>
+        </tr>
+        <tr>
+          <td>14</td>
+          <td><strong>7289</strong></td>
+          <td>DOZEN 750ML LACQUER THINNERS</td>
+          <td>Accessories</td>
+          <td class="num">R290.7K</td>
+        </tr>
+        <tr>
+          <td>15</td>
+          <td><strong>369875</strong></td>
+          <td>5L Q D RED OXIDE PRIMER</td>
+          <td>Primers</td>
+          <td class="num">R286.1K</td>
+        </tr>
+        <tr>
+          <td>16</td>
+          <td><strong>139494</strong></td>
+          <td>20L DECOR SILVER MIST PVA</td>
+          <td>PVA Paints</td>
+          <td class="num">R278.4K</td>
+        </tr>
+        <tr>
+          <td>17</td>
+          <td><strong>299811</strong></td>
+          <td>5L HIGH GLOSS (MQ) CREAM</td>
+          <td>Enamel</td>
+          <td class="num">R263.4K</td>
+        </tr>
+        <tr>
+          <td>18</td>
+          <td><strong>QD9722</strong></td>
+          <td>1L Q D BRONZE ENAMEL</td>
+          <td>QD Enamel</td>
+          <td class="num">R259.6K</td>
+        </tr>
+        <tr>
+          <td>19</td>
+          <td><strong>139417</strong></td>
+          <td>20L DECOR KIWI PVA</td>
+          <td>PVA Paints</td>
+          <td class="num">R244.8K</td>
+        </tr>
+        <tr>
+          <td>20</td>
+          <td><strong>139416</strong></td>
+          <td>20L DECOR CHESTNUT PVA</td>
+          <td>PVA Paints</td>
+          <td class="num">R244.6K</td>
+        </tr></tbody>
+      </table>
+    </div>
+  </div>
+
+</div><!-- /products -->
+
 </div><!-- /main -->
 
 <footer>
   <strong>Olympic Paints</strong> · Sales Performance Dashboard<br>
   Data: <em>Sales_Invoices_All.parquet</em> · 27 month-data-points across FY2024–FY2026<br>
-  Target = prior-year same-month × 1.30 (30% growth rule) · Generated 05 May 2026 11:29
+  Target = prior-year same-month × 1.30 (30% growth rule) · Generated 05 May 2026 12:46
 </footer>
 
 <script>
 // ── Embedded data ─────────────────────────────────────────────────────────────
-const DATA = {"generated": "05 May 2026 11:29", "reps": ["BV", "NP", "AP", "AC", "BM"], "rep_names": {"BV": "Bhadresh Vallabh", "NP": "Nikhil Panchal", "AP": "Amit Patel", "AC": "Aboo Cassim", "BM": "Byron Minnie"}, "month_labels": {"1": "Jan", "2": "Feb", "3": "Mar", "4": "Apr", "5": "May", "6": "Jun", "7": "Jul", "8": "Aug", "9": "Sep", "10": "Oct", "11": "Nov", "12": "Dec"}, "monthly_company": {"2024": {"3": {"inv": 10678890.14, "cr": 1383166.07, "net": 9295724.07}, "4": {"inv": 8708534.63, "cr": 266956.46, "net": 8441578.17}, "5": {"inv": 10876794.16, "cr": 359018.18, "net": 10517775.98}, "6": {"inv": 9639135.39, "cr": 283139.54, "net": 9355995.85}, "7": {"inv": 10637524.28, "cr": 244068.69, "net": 10393455.59}, "8": {"inv": 12337492.01, "cr": 280399.54, "net": 12057092.47}, "9": {"inv": 11407241.69, "cr": 336394.61, "net": 11070847.08}, "10": {"inv": 12531569.31, "cr": 434992.87, "net": 12096576.44}, "11": {"inv": 15367880.0, "cr": 390032.0, "net": 14977848.0}, "12": {"inv": 17720405.77, "cr": 659532.67, "net": 17060873.1}}, "2025": {"1": {"inv": 7425210.34, "cr": 251680.7, "net": 7173529.64}, "2": {"inv": 8257662.08, "cr": 540406.86, "net": 7717255.22}, "3": {"inv": 9909795.72, "cr": 334843.02, "net": 9574952.7}, "4": {"inv": 10484020.54, "cr": 567641.39, "net": 9916379.15}, "5": {"inv": 10171143.75, "cr": 1041009.15, "net": 9130134.6}, "6": {"inv": 9934262.11, "cr": 380942.51, "net": 9553319.6}, "7": {"inv": 12595122.34, "cr": 480747.62, "net": 12114374.72}, "8": {"inv": 12634021.56, "cr": 601615.14, "net": 12032406.42}, "9": {"inv": 13360598.59, "cr": 607328.13, "net": 12753270.46}, "10": {"inv": 16467846.63, "cr": 445941.58, "net": 16021905.05}, "11": {"inv": 16517295.77, "cr": 893879.18, "net": 15623416.59}, "12": {"inv": 18726389.67, "cr": 411864.34, "net": 18314525.33}}, "2026": {"1": {"inv": 7881208.89, "cr": 1125694.58, "net": 6755514.31}, "2": {"inv": 10111729.43, "cr": 287299.32, "net": 9824430.11}, "3": {"inv": 10877104.46, "cr": 711685.88, "net": 10165418.58}, "4": {"inv": 14834111.73, "cr": 2389489.26, "net": 12444622.47}, "5": {"inv": 646617.27, "cr": 1910.58, "net": 644706.69}}}, "monthly_rep": {"BV": {"2024": {"3": 3094307.22, "4": 3275413.97, "5": 4594241.42, "6": 3775329.27, "7": 4159952.71, "8": 4938314.7, "9": 4804869.52, "10": 4693186.53, "11": 4931707.39, "12": 7211815.83}, "2025": {"1": 2485102.96, "2": 2228934.76, "3": 3765312.01, "4": 3862571.5, "5": 4253019.74, "6": 4022819.12, "7": 5354681.86, "8": 4727295.14, "9": 5974009.73, "10": 7950509.83, "11": 6938273.83, "12": 7009168.02}, "2026": {"1": 2099112.9, "2": 3723615.08, "3": 5067828.36, "4": 4361203.43, "5": 38916.11}}, "NP": {"2024": {"3": 2306087.65, "4": 2378568.71, "5": 2560911.54, "6": 2356735.17, "7": 2764935.25, "8": 2586172.11, "9": 1927278.32, "10": 3270534.78, "11": 3469553.06, "12": 4251813.8}, "2025": {"1": 1747169.93, "2": 1907425.09, "3": 3624528.45, "4": 3586410.55, "5": 3502191.62, "6": 3354854.74, "7": 3905795.02, "8": 4275505.66, "9": 3792598.66, "10": 4330911.33, "11": 5020111.4, "12": 7447786.12}, "2026": {"1": 3288773.26, "2": 4038739.36, "3": 3057397.78, "4": 4455001.72, "5": 284412.21}}, "AP": {"2024": {"3": 886328.26, "4": 834016.86, "5": 864885.27, "6": 520633.98, "7": 764702.13, "8": 1271125.98, "9": 721869.4, "10": 996535.08, "11": 1678863.87, "12": 1546826.6}, "2025": {"1": 630228.34, "2": 810768.36, "3": 694954.01, "4": 970487.69, "5": 552666.82, "6": 920011.07, "7": 1129593.08, "8": 1391893.99, "9": 1229475.18, "10": 1331019.08, "11": 2282723.98, "12": 1848353.19}, "2026": {"1": 785147.22, "2": 675807.3, "3": 966127.6, "4": 1909852.32, "5": 182791.88}}, "AC": {"2024": {"3": 703533.23, "4": 559144.53, "5": 743135.11, "6": 702234.78, "7": 867164.18, "8": 917523.13, "9": 866998.04, "10": 1044100.35, "11": 1062137.07, "12": 1296320.39}, "2025": {"1": 585698.76, "2": 668058.13, "3": 1411589.63, "4": 874073.8, "5": 1111127.07, "6": 1106673.18, "7": 1346526.83, "8": 1241199.82, "9": 1449913.86, "10": 1985822.1, "11": 1236843.74, "12": 1671834.78}, "2026": {"1": 766620.64, "2": 1151367.68, "3": 692901.28, "4": 1600180.58, "5": 74167.71}}, "BM": {"2024": {"4": 1018.44}, "2025": {"6": 1193.21, "7": 4418.42, "8": 146393.66, "9": 8505.83, "10": 32364.79, "11": 11971.29, "12": 1477.39}, "2026": {"1": 2219.7, "2": 4281.33, "3": 50074.4, "4": 23949.07}}}, "fy_monthly_company": {"2024": {"3": {"inv": 10678890.14, "cr": 1383166.07, "net": 9295724.07}, "4": {"inv": 8708534.63, "cr": 266956.46, "net": 8441578.17}, "5": {"inv": 10876794.16, "cr": 359018.18, "net": 10517775.98}, "6": {"inv": 9639135.39, "cr": 283139.54, "net": 9355995.85}, "7": {"inv": 10637524.28, "cr": 244068.69, "net": 10393455.59}, "8": {"inv": 12337492.01, "cr": 280399.54, "net": 12057092.47}, "9": {"inv": 11407241.69, "cr": 336394.61, "net": 11070847.08}, "10": {"inv": 12531569.31, "cr": 434992.87, "net": 12096576.44}, "11": {"inv": 15367880.0, "cr": 390032.0, "net": 14977848.0}, "12": {"inv": 17720405.77, "cr": 659532.67, "net": 17060873.1}, "1": {"inv": 7425210.34, "cr": 251680.7, "net": 7173529.64}, "2": {"inv": 8257662.08, "cr": 540406.86, "net": 7717255.22}}, "2025": {"3": {"inv": 9909795.72, "cr": 334843.02, "net": 9574952.7}, "4": {"inv": 10484020.54, "cr": 567641.39, "net": 9916379.15}, "5": {"inv": 10171143.75, "cr": 1041009.15, "net": 9130134.6}, "6": {"inv": 9934262.11, "cr": 380942.51, "net": 9553319.6}, "7": {"inv": 12595122.34, "cr": 480747.62, "net": 12114374.72}, "8": {"inv": 12634021.56, "cr": 601615.14, "net": 12032406.42}, "9": {"inv": 13360598.59, "cr": 607328.13, "net": 12753270.46}, "10": {"inv": 16467846.63, "cr": 445941.58, "net": 16021905.05}, "11": {"inv": 16517295.77, "cr": 893879.18, "net": 15623416.59}, "12": {"inv": 18726389.67, "cr": 411864.34, "net": 18314525.33}, "1": {"inv": 7881208.89, "cr": 1125694.58, "net": 6755514.31}, "2": {"inv": 10111729.43, "cr": 287299.32, "net": 9824430.11}}, "2026": {"3": {"inv": 10877104.46, "cr": 711685.88, "net": 10165418.58}, "4": {"inv": 14834111.73, "cr": 2389489.26, "net": 12444622.47}, "5": {"inv": 646617.27, "cr": 1910.58, "net": 644706.69}}}, "fy_monthly_rep": {"BV": {"2024": {"3": 3094307.22, "4": 3275413.97, "5": 4594241.42, "6": 3775329.27, "7": 4159952.71, "8": 4938314.7, "9": 4804869.52, "10": 4693186.53, "11": 4931707.39, "12": 7211815.83, "1": 2485102.96, "2": 2228934.76}, "2025": {"3": 3765312.01, "4": 3862571.5, "5": 4253019.74, "6": 4022819.12, "7": 5354681.86, "8": 4727295.14, "9": 5974009.73, "10": 7950509.83, "11": 6938273.83, "12": 7009168.02, "1": 2099112.9, "2": 3723615.08}, "2026": {"3": 5067828.36, "4": 4361203.43, "5": 38916.11}}, "NP": {"2024": {"3": 2306087.65, "4": 2378568.71, "5": 2560911.54, "6": 2356735.17, "7": 2764935.25, "8": 2586172.11, "9": 1927278.32, "10": 3270534.78, "11": 3469553.06, "12": 4251813.8, "1": 1747169.93, "2": 1907425.09}, "2025": {"3": 3624528.45, "4": 3586410.55, "5": 3502191.62, "6": 3354854.74, "7": 3905795.02, "8": 4275505.66, "9": 3792598.66, "10": 4330911.33, "11": 5020111.4, "12": 7447786.12, "1": 3288773.26, "2": 4038739.36}, "2026": {"3": 3057397.78, "4": 4455001.72, "5": 284412.21}}, "AP": {"2024": {"3": 886328.26, "4": 834016.86, "5": 864885.27, "6": 520633.98, "7": 764702.13, "8": 1271125.98, "9": 721869.4, "10": 996535.08, "11": 1678863.87, "12": 1546826.6, "1": 630228.34, "2": 810768.36}, "2025": {"3": 694954.01, "4": 970487.69, "5": 552666.82, "6": 920011.07, "7": 1129593.08, "8": 1391893.99, "9": 1229475.18, "10": 1331019.08, "11": 2282723.98, "12": 1848353.19, "1": 785147.22, "2": 675807.3}, "2026": {"3": 966127.6, "4": 1909852.32, "5": 182791.88}}, "AC": {"2024": {"3": 703533.23, "4": 559144.53, "5": 743135.11, "6": 702234.78, "7": 867164.18, "8": 917523.13, "9": 866998.04, "10": 1044100.35, "11": 1062137.07, "12": 1296320.39, "1": 585698.76, "2": 668058.13}, "2025": {"3": 1411589.63, "4": 874073.8, "5": 1111127.07, "6": 1106673.18, "7": 1346526.83, "8": 1241199.82, "9": 1449913.86, "10": 1985822.1, "11": 1236843.74, "12": 1671834.78, "1": 766620.64, "2": 1151367.68}, "2026": {"3": 692901.28, "4": 1600180.58, "5": 74167.71}}, "BM": {"2024": {"4": 1018.44}, "2025": {"6": 1193.21, "7": 4418.42, "8": 146393.66, "9": 8505.83, "10": 32364.79, "11": 11971.29, "12": 1477.39, "1": 2219.7, "2": 4281.33}, "2026": {"3": 50074.4, "4": 23949.07}}}, "fy_totals": {"2024": {"inv": 135588339.8, "cr": 5429788.19, "net": 130158551.61}, "2025": {"inv": 148793435.0, "cr": 7178805.96, "net": 141614629.04}, "2026": {"inv": 26357833.46, "cr": 3103085.72, "net": 23254747.74}}, "fy_rep": {"BV": {"2024": 50193176.28, "2025": 59680388.76, "2026": 9467947.9}, "NP": {"2024": 31527185.41, "2025": 50168206.17, "2026": 7796811.71}, "AP": {"2024": 11526784.13, "2025": 13812132.61, "2026": 3058771.8}, "AC": {"2024": 10016047.7, "2025": 15353593.13, "2026": 2367249.57}, "BM": {"2024": 1018.44, "2025": 212825.62, "2026": 74023.47}}, "top_accounts": {"2025": [{"accno": "KB011", "net": 13105638.64, "store": "Brits Hardware & Glass", "rep": "BV", "area": "BV1"}, {"accno": "KK021", "net": 9240321.56, "store": "Kit Kat Group (Pty) Ltd", "rep": "NP", "area": "NP1"}, {"accno": "KS019", "net": 5599547.7, "store": "S.I.Hardware", "rep": "NP", "area": "NP4"}, {"accno": "KM027", "net": 5441615.11, "store": "RANK HARDWARE", "rep": "AC", "area": "AC1"}, {"accno": "KB100", "net": 4298517.18, "store": "Builders Direct Depot Pty Ltd", "rep": "NP", "area": "NP2"}, {"accno": "KH035", "net": 4260821.0, "store": "HGM Steelboys CC", "rep": "BV", "area": "BV3"}, {"accno": "KD008", "net": 3951864.88, "store": "Dada's World of Hardware CC", "rep": "BV", "area": "BV3"}, {"accno": "KD001", "net": 3831741.5, "store": "Dainty's Wholesale Hardware", "rep": "BV", "area": "BV1"}, {"accno": "KS029", "net": 3721847.38, "store": "Patels Hardware", "rep": "BV", "area": "BV3"}, {"accno": "KP005", "net": 3629916.68, "store": "Patel (Nkomazi Imp. & Exp. CC)", "rep": "BV", "area": "BV2"}, {"accno": "KH021", "net": 2720955.56, "store": "Ebrahim Abramjee Traders CC", "rep": "AC", "area": "AC3"}, {"accno": "KM127", "net": 2491661.6, "store": "Myka Trade 2 T A New Builders", "rep": "BV", "area": "BV3"}, {"accno": "KE005", "net": 2160781.91, "store": "Easy Build Hardware", "rep": "NP", "area": "NP1"}, {"accno": "KM071", "net": 2000772.28, "store": "Inyameko Trading 1605cc", "rep": "NP", "area": "NP4"}, {"accno": "KS004", "net": 1972254.31, "store": "S.E.Z. Superette", "rep": "BV", "area": "BV1"}], "2026": [{"accno": "KB011", "net": 2539616.85, "store": "Brits Hardware & Glass", "rep": "BV", "area": "BV1"}, {"accno": "KK021", "net": 1320246.22, "store": "Kit Kat Group (Pty) Ltd", "rep": "NP", "area": "NP1"}, {"accno": "KS019", "net": 963521.02, "store": "S.I. Hardware", "rep": "NP", "area": "NP4"}, {"accno": "KH021", "net": 716065.35, "store": "Ebrahim Abramjee Traders CC", "rep": "AC", "area": "AC1"}, {"accno": "KH035", "net": 687494.0, "store": "HGM Steelboys CC", "rep": "BV", "area": "BV3"}, {"accno": "KM027", "net": 599932.16, "store": "Jane Furse Building Supply", "rep": "BP", "area": ""}, {"accno": "KP005", "net": 537176.71, "store": "Patel (Nkomazi Imp. & Exp. CC)", "rep": "BV", "area": "BV2"}, {"accno": "KW004", "net": 535477.5, "store": "Buildware ta Siam Trading", "rep": "BV", "area": "BV4"}, {"accno": "KM127", "net": 521942.02, "store": "Myka Trade 2  Mankweng", "rep": "BV", "area": "BV3"}, {"accno": "KD001", "net": 484715.37, "store": "Dainty's Wholesale Hardware", "rep": "BV", "area": "BV1"}, {"accno": "KM071", "net": 479588.94, "store": "Inyameko Trading 1605cc", "rep": "NP", "area": "NP4"}, {"accno": "KE005", "net": 455136.68, "store": "Easy Build Hardware", "rep": "NP", "area": "NP1"}, {"accno": "KB100", "net": 385841.58, "store": "Builders Direct Depot Pty Ltd", "rep": "NP", "area": "NP2"}, {"accno": "KS004", "net": 383749.67, "store": "S.E.Z. Superette", "rep": "BV", "area": "BV1"}, {"accno": "KD008", "net": 333020.29, "store": "Dada's World of Hardware CC", "rep": "BV", "area": "BV3"}]}, "available_months": [{"year": 2024, "month": 3}, {"year": 2024, "month": 4}, {"year": 2024, "month": 5}, {"year": 2024, "month": 6}, {"year": 2024, "month": 7}, {"year": 2024, "month": 8}, {"year": 2024, "month": 9}, {"year": 2024, "month": 10}, {"year": 2024, "month": 11}, {"year": 2024, "month": 12}, {"year": 2025, "month": 1}, {"year": 2025, "month": 2}, {"year": 2025, "month": 3}, {"year": 2025, "month": 4}, {"year": 2025, "month": 5}, {"year": 2025, "month": 6}, {"year": 2025, "month": 7}, {"year": 2025, "month": 8}, {"year": 2025, "month": 9}, {"year": 2025, "month": 10}, {"year": 2025, "month": 11}, {"year": 2025, "month": 12}, {"year": 2026, "month": 1}, {"year": 2026, "month": 2}, {"year": 2026, "month": 3}, {"year": 2026, "month": 4}, {"year": 2026, "month": 5}], "partial_months": [{"year": 2026, "month": 5, "through_day": 4}], "target_growth": 1.3};
+const DATA = {"generated": "05 May 2026 12:46", "reps": ["BV", "NP", "AP", "AC", "BM"], "rep_names": {"BV": "Bhadresh Vallabh", "NP": "Nikhil Panchal", "AP": "Amit Patel", "AC": "Aboo Cassim", "BM": "Byron Minnie"}, "month_labels": {"1": "Jan", "2": "Feb", "3": "Mar", "4": "Apr", "5": "May", "6": "Jun", "7": "Jul", "8": "Aug", "9": "Sep", "10": "Oct", "11": "Nov", "12": "Dec"}, "monthly_company": {"2024": {"3": {"inv": 10678890.14, "cr": 1383166.07, "net": 9295724.07}, "4": {"inv": 8708534.63, "cr": 266956.46, "net": 8441578.17}, "5": {"inv": 10876794.16, "cr": 359018.18, "net": 10517775.98}, "6": {"inv": 9639135.39, "cr": 283139.54, "net": 9355995.85}, "7": {"inv": 10637524.28, "cr": 244068.69, "net": 10393455.59}, "8": {"inv": 12337492.01, "cr": 280399.54, "net": 12057092.47}, "9": {"inv": 11407241.69, "cr": 336394.61, "net": 11070847.08}, "10": {"inv": 12531569.31, "cr": 434992.87, "net": 12096576.44}, "11": {"inv": 15367880.0, "cr": 390032.0, "net": 14977848.0}, "12": {"inv": 17720405.77, "cr": 659532.67, "net": 17060873.1}}, "2025": {"1": {"inv": 7425210.34, "cr": 251680.7, "net": 7173529.64}, "2": {"inv": 8257662.08, "cr": 540406.86, "net": 7717255.22}, "3": {"inv": 9909795.72, "cr": 334843.02, "net": 9574952.7}, "4": {"inv": 10484020.54, "cr": 567641.39, "net": 9916379.15}, "5": {"inv": 10171143.75, "cr": 1041009.15, "net": 9130134.6}, "6": {"inv": 9934262.11, "cr": 380942.51, "net": 9553319.6}, "7": {"inv": 12595122.34, "cr": 480747.62, "net": 12114374.72}, "8": {"inv": 12634021.56, "cr": 601615.14, "net": 12032406.42}, "9": {"inv": 13360598.59, "cr": 607328.13, "net": 12753270.46}, "10": {"inv": 16467846.63, "cr": 445941.58, "net": 16021905.05}, "11": {"inv": 16517295.77, "cr": 893879.18, "net": 15623416.59}, "12": {"inv": 18726389.67, "cr": 411864.34, "net": 18314525.33}}, "2026": {"1": {"inv": 7881208.89, "cr": 1125694.58, "net": 6755514.31}, "2": {"inv": 10111729.43, "cr": 287299.32, "net": 9824430.11}, "3": {"inv": 10877104.46, "cr": 711685.88, "net": 10165418.58}, "4": {"inv": 14834111.73, "cr": 2389489.26, "net": 12444622.47}, "5": {"inv": 646617.27, "cr": 1910.58, "net": 644706.69}}}, "monthly_rep": {"BV": {"2024": {"3": 3094307.22, "4": 3275413.97, "5": 4594241.42, "6": 3775329.27, "7": 4159952.71, "8": 4938314.7, "9": 4804869.52, "10": 4693186.53, "11": 4931707.39, "12": 7211815.83}, "2025": {"1": 2485102.96, "2": 2228934.76, "3": 3765312.01, "4": 3862571.5, "5": 4253019.74, "6": 4022819.12, "7": 5354681.86, "8": 4727295.14, "9": 5974009.73, "10": 7950509.83, "11": 6938273.83, "12": 7009168.02}, "2026": {"1": 2099112.9, "2": 3723615.08, "3": 5067828.36, "4": 4361203.43, "5": 38916.11}}, "NP": {"2024": {"3": 2306087.65, "4": 2378568.71, "5": 2560911.54, "6": 2356735.17, "7": 2764935.25, "8": 2586172.11, "9": 1927278.32, "10": 3270534.78, "11": 3469553.06, "12": 4251813.8}, "2025": {"1": 1747169.93, "2": 1907425.09, "3": 3624528.45, "4": 3586410.55, "5": 3502191.62, "6": 3354854.74, "7": 3905795.02, "8": 4275505.66, "9": 3792598.66, "10": 4330911.33, "11": 5020111.4, "12": 7447786.12}, "2026": {"1": 3288773.26, "2": 4038739.36, "3": 3057397.78, "4": 4455001.72, "5": 284412.21}}, "AP": {"2024": {"3": 886328.26, "4": 834016.86, "5": 864885.27, "6": 520633.98, "7": 764702.13, "8": 1271125.98, "9": 721869.4, "10": 996535.08, "11": 1678863.87, "12": 1546826.6}, "2025": {"1": 630228.34, "2": 810768.36, "3": 694954.01, "4": 970487.69, "5": 552666.82, "6": 920011.07, "7": 1129593.08, "8": 1391893.99, "9": 1229475.18, "10": 1331019.08, "11": 2282723.98, "12": 1848353.19}, "2026": {"1": 785147.22, "2": 675807.3, "3": 966127.6, "4": 1909852.32, "5": 182791.88}}, "AC": {"2024": {"3": 703533.23, "4": 559144.53, "5": 743135.11, "6": 702234.78, "7": 867164.18, "8": 917523.13, "9": 866998.04, "10": 1044100.35, "11": 1062137.07, "12": 1296320.39}, "2025": {"1": 585698.76, "2": 668058.13, "3": 1411589.63, "4": 874073.8, "5": 1111127.07, "6": 1106673.18, "7": 1346526.83, "8": 1241199.82, "9": 1449913.86, "10": 1985822.1, "11": 1236843.74, "12": 1671834.78}, "2026": {"1": 766620.64, "2": 1151367.68, "3": 692901.28, "4": 1600180.58, "5": 74167.71}}, "BM": {"2024": {"4": 1018.44}, "2025": {"6": 1193.21, "7": 4418.42, "8": 146393.66, "9": 8505.83, "10": 32364.79, "11": 11971.29, "12": 1477.39}, "2026": {"1": 2219.7, "2": 4281.33, "3": 50074.4, "4": 23949.07}}}, "fy_monthly_company": {"2024": {"3": {"inv": 10678890.14, "cr": 1383166.07, "net": 9295724.07}, "4": {"inv": 8708534.63, "cr": 266956.46, "net": 8441578.17}, "5": {"inv": 10876794.16, "cr": 359018.18, "net": 10517775.98}, "6": {"inv": 9639135.39, "cr": 283139.54, "net": 9355995.85}, "7": {"inv": 10637524.28, "cr": 244068.69, "net": 10393455.59}, "8": {"inv": 12337492.01, "cr": 280399.54, "net": 12057092.47}, "9": {"inv": 11407241.69, "cr": 336394.61, "net": 11070847.08}, "10": {"inv": 12531569.31, "cr": 434992.87, "net": 12096576.44}, "11": {"inv": 15367880.0, "cr": 390032.0, "net": 14977848.0}, "12": {"inv": 17720405.77, "cr": 659532.67, "net": 17060873.1}, "1": {"inv": 7425210.34, "cr": 251680.7, "net": 7173529.64}, "2": {"inv": 8257662.08, "cr": 540406.86, "net": 7717255.22}}, "2025": {"3": {"inv": 9909795.72, "cr": 334843.02, "net": 9574952.7}, "4": {"inv": 10484020.54, "cr": 567641.39, "net": 9916379.15}, "5": {"inv": 10171143.75, "cr": 1041009.15, "net": 9130134.6}, "6": {"inv": 9934262.11, "cr": 380942.51, "net": 9553319.6}, "7": {"inv": 12595122.34, "cr": 480747.62, "net": 12114374.72}, "8": {"inv": 12634021.56, "cr": 601615.14, "net": 12032406.42}, "9": {"inv": 13360598.59, "cr": 607328.13, "net": 12753270.46}, "10": {"inv": 16467846.63, "cr": 445941.58, "net": 16021905.05}, "11": {"inv": 16517295.77, "cr": 893879.18, "net": 15623416.59}, "12": {"inv": 18726389.67, "cr": 411864.34, "net": 18314525.33}, "1": {"inv": 7881208.89, "cr": 1125694.58, "net": 6755514.31}, "2": {"inv": 10111729.43, "cr": 287299.32, "net": 9824430.11}}, "2026": {"3": {"inv": 10877104.46, "cr": 711685.88, "net": 10165418.58}, "4": {"inv": 14834111.73, "cr": 2389489.26, "net": 12444622.47}, "5": {"inv": 646617.27, "cr": 1910.58, "net": 644706.69}}}, "fy_monthly_rep": {"BV": {"2024": {"3": 3094307.22, "4": 3275413.97, "5": 4594241.42, "6": 3775329.27, "7": 4159952.71, "8": 4938314.7, "9": 4804869.52, "10": 4693186.53, "11": 4931707.39, "12": 7211815.83, "1": 2485102.96, "2": 2228934.76}, "2025": {"3": 3765312.01, "4": 3862571.5, "5": 4253019.74, "6": 4022819.12, "7": 5354681.86, "8": 4727295.14, "9": 5974009.73, "10": 7950509.83, "11": 6938273.83, "12": 7009168.02, "1": 2099112.9, "2": 3723615.08}, "2026": {"3": 5067828.36, "4": 4361203.43, "5": 38916.11}}, "NP": {"2024": {"3": 2306087.65, "4": 2378568.71, "5": 2560911.54, "6": 2356735.17, "7": 2764935.25, "8": 2586172.11, "9": 1927278.32, "10": 3270534.78, "11": 3469553.06, "12": 4251813.8, "1": 1747169.93, "2": 1907425.09}, "2025": {"3": 3624528.45, "4": 3586410.55, "5": 3502191.62, "6": 3354854.74, "7": 3905795.02, "8": 4275505.66, "9": 3792598.66, "10": 4330911.33, "11": 5020111.4, "12": 7447786.12, "1": 3288773.26, "2": 4038739.36}, "2026": {"3": 3057397.78, "4": 4455001.72, "5": 284412.21}}, "AP": {"2024": {"3": 886328.26, "4": 834016.86, "5": 864885.27, "6": 520633.98, "7": 764702.13, "8": 1271125.98, "9": 721869.4, "10": 996535.08, "11": 1678863.87, "12": 1546826.6, "1": 630228.34, "2": 810768.36}, "2025": {"3": 694954.01, "4": 970487.69, "5": 552666.82, "6": 920011.07, "7": 1129593.08, "8": 1391893.99, "9": 1229475.18, "10": 1331019.08, "11": 2282723.98, "12": 1848353.19, "1": 785147.22, "2": 675807.3}, "2026": {"3": 966127.6, "4": 1909852.32, "5": 182791.88}}, "AC": {"2024": {"3": 703533.23, "4": 559144.53, "5": 743135.11, "6": 702234.78, "7": 867164.18, "8": 917523.13, "9": 866998.04, "10": 1044100.35, "11": 1062137.07, "12": 1296320.39, "1": 585698.76, "2": 668058.13}, "2025": {"3": 1411589.63, "4": 874073.8, "5": 1111127.07, "6": 1106673.18, "7": 1346526.83, "8": 1241199.82, "9": 1449913.86, "10": 1985822.1, "11": 1236843.74, "12": 1671834.78, "1": 766620.64, "2": 1151367.68}, "2026": {"3": 692901.28, "4": 1600180.58, "5": 74167.71}}, "BM": {"2024": {"4": 1018.44}, "2025": {"6": 1193.21, "7": 4418.42, "8": 146393.66, "9": 8505.83, "10": 32364.79, "11": 11971.29, "12": 1477.39, "1": 2219.7, "2": 4281.33}, "2026": {"3": 50074.4, "4": 23949.07}}}, "fy_totals": {"2024": {"inv": 135588339.8, "cr": 5429788.19, "net": 130158551.61}, "2025": {"inv": 148793435.0, "cr": 7178805.96, "net": 141614629.04}, "2026": {"inv": 26357833.46, "cr": 3103085.72, "net": 23254747.74}}, "fy_rep": {"BV": {"2024": 50193176.28, "2025": 59680388.76, "2026": 9467947.9}, "NP": {"2024": 31527185.41, "2025": 50168206.17, "2026": 7796811.71}, "AP": {"2024": 11526784.13, "2025": 13812132.61, "2026": 3058771.8}, "AC": {"2024": 10016047.7, "2025": 15353593.13, "2026": 2367249.57}, "BM": {"2024": 1018.44, "2025": 212825.62, "2026": 74023.47}}, "top_accounts": {"2025": [{"accno": "KB011", "net": 13105638.64, "store": "Brits Hardware & Glass", "rep": "BV", "area": "BV1"}, {"accno": "KK021", "net": 9240321.56, "store": "Kit Kat Group (Pty) Ltd", "rep": "NP", "area": "NP1"}, {"accno": "KS019", "net": 5599547.7, "store": "S.I.Hardware", "rep": "NP", "area": "NP4"}, {"accno": "KM027", "net": 5441615.11, "store": "RANK HARDWARE", "rep": "AC", "area": "AC1"}, {"accno": "KB100", "net": 4298517.18, "store": "Builders Direct Depot Pty Ltd", "rep": "NP", "area": "NP2"}, {"accno": "KH035", "net": 4260821.0, "store": "HGM Steelboys CC", "rep": "BV", "area": "BV3"}, {"accno": "KD008", "net": 3951864.88, "store": "Dada's World of Hardware CC", "rep": "BV", "area": "BV3"}, {"accno": "KD001", "net": 3831741.5, "store": "Dainty's Wholesale Hardware", "rep": "BV", "area": "BV1"}, {"accno": "KS029", "net": 3721847.38, "store": "Patels Hardware", "rep": "BV", "area": "BV3"}, {"accno": "KP005", "net": 3629916.68, "store": "Patel (Nkomazi Imp. & Exp. CC)", "rep": "BV", "area": "BV2"}, {"accno": "KH021", "net": 2720955.56, "store": "Ebrahim Abramjee Traders CC", "rep": "AC", "area": "AC3"}, {"accno": "KM127", "net": 2491661.6, "store": "Myka Trade 2 T A New Builders", "rep": "BV", "area": "BV3"}, {"accno": "KE005", "net": 2160781.91, "store": "Easy Build Hardware", "rep": "NP", "area": "NP1"}, {"accno": "KM071", "net": 2000772.28, "store": "Inyameko Trading 1605cc", "rep": "NP", "area": "NP4"}, {"accno": "KS004", "net": 1972254.31, "store": "S.E.Z. Superette", "rep": "BV", "area": "BV1"}], "2026": [{"accno": "KB011", "net": 2539616.85, "store": "Brits Hardware & Glass", "rep": "BV", "area": "BV1"}, {"accno": "KK021", "net": 1320246.22, "store": "Kit Kat Group (Pty) Ltd", "rep": "NP", "area": "NP1"}, {"accno": "KS019", "net": 963521.02, "store": "S.I. Hardware", "rep": "NP", "area": "NP4"}, {"accno": "KH021", "net": 716065.35, "store": "Ebrahim Abramjee Traders CC", "rep": "AC", "area": "AC1"}, {"accno": "KH035", "net": 687494.0, "store": "HGM Steelboys CC", "rep": "BV", "area": "BV3"}, {"accno": "KM027", "net": 599932.16, "store": "Jane Furse Building Supply", "rep": "BP", "area": ""}, {"accno": "KP005", "net": 537176.71, "store": "Patel (Nkomazi Imp. & Exp. CC)", "rep": "BV", "area": "BV2"}, {"accno": "KW004", "net": 535477.5, "store": "Buildware ta Siam Trading", "rep": "BV", "area": "BV4"}, {"accno": "KM127", "net": 521942.02, "store": "Myka Trade 2  Mankweng", "rep": "BV", "area": "BV3"}, {"accno": "KD001", "net": 484715.37, "store": "Dainty's Wholesale Hardware", "rep": "BV", "area": "BV1"}, {"accno": "KM071", "net": 479588.94, "store": "Inyameko Trading 1605cc", "rep": "NP", "area": "NP4"}, {"accno": "KE005", "net": 455136.68, "store": "Easy Build Hardware", "rep": "NP", "area": "NP1"}, {"accno": "KB100", "net": 385841.58, "store": "Builders Direct Depot Pty Ltd", "rep": "NP", "area": "NP2"}, {"accno": "KS004", "net": 383749.67, "store": "S.E.Z. Superette", "rep": "BV", "area": "BV1"}, {"accno": "KD008", "net": 333020.29, "store": "Dada's World of Hardware CC", "rep": "BV", "area": "BV3"}]}, "category_revenue": {"2024": [{"cat": "Enamel", "net": 35953657.51}, {"cat": "PVA Paints", "net": 34103898.56}, {"cat": "QD Enamel", "net": 19527359.41}, {"cat": "Woodcare", "net": 9856070.87}, {"cat": "Waterproofing", "net": 7324570.58}, {"cat": "Accessories", "net": 6555555.72}, {"cat": "Floor & Roof Paints", "net": 5883902.41}, {"cat": "Primers", "net": 4267784.42}, {"cat": "Putty", "net": 3371752.93}, {"cat": "General", "net": 2337025.82}, {"cat": "Specialised Coatings", "net": 943027.2}], "2025": [{"cat": "Enamel", "net": 40506661.47}, {"cat": "PVA Paints", "net": 34547116.52}, {"cat": "QD Enamel", "net": 22992191.09}, {"cat": "Woodcare", "net": 10765591.52}, {"cat": "Waterproofing", "net": 7516346.53}, {"cat": "Accessories", "net": 7226310.77}, {"cat": "Floor & Roof Paints", "net": 6803327.26}, {"cat": "Primers", "net": 5005675.45}, {"cat": "Putty", "net": 3123724.49}, {"cat": "General", "net": 2174856.36}, {"cat": "Specialised Coatings", "net": 850958.39}], "2026": [{"cat": "Enamel", "net": 6756314.35}, {"cat": "PVA Paints", "net": 5009346.23}, {"cat": "QD Enamel", "net": 4460480.68}, {"cat": "Woodcare", "net": 1875031.85}, {"cat": "Accessories", "net": 1483391.5}, {"cat": "Waterproofing", "net": 1145168.57}, {"cat": "Floor & Roof Paints", "net": 998617.55}, {"cat": "Primers", "net": 883804.48}, {"cat": "Putty", "net": 602412.91}, {"cat": "General", "net": 261593.95}, {"cat": "Specialised Coatings", "net": 144641.02}]}, "top_products": {"2025": [{"prodno": "QD9822", "name": "5L Q D BRONZE ENAMEL", "cat": "QD Enamel", "net": 9746175.82}, {"prodno": "299821", "name": "5L HIGH GLOSS (MQ) BLACK", "cat": "Enamel", "net": 4177809.12}, {"prodno": "7298", "name": "5LT THINNERS", "cat": "Accessories", "net": 3699034.97}, {"prodno": "299825", "name": "5L HIGH GLOSS (MQ) GREY", "cat": "Enamel", "net": 3634962.23}, {"prodno": "299801", "name": "5L HIGH GLOSS (MQ) WHITE", "cat": "Enamel", "net": 3618037.75}, {"prodno": "139401", "name": "20L DECOR WHITE PVA", "cat": "PVA Paints", "net": 3500016.62}, {"prodno": "299721", "name": "1L HIGH GLOSS (MQ) BLACK", "cat": "Enamel", "net": 3101042.83}, {"prodno": "389825", "name": "5L RAINPROOF GREY", "cat": "Waterproofing", "net": 2349159.82}, {"prodno": "QD9821", "name": "5L Q D BLACK ENAMEL", "cat": "QD Enamel", "net": 2223671.6}, {"prodno": "299831", "name": "5L HIGH GLOSS (MQ) G BROWN", "cat": "Enamel", "net": 2167751.08}, {"prodno": "QD9722", "name": "1L Q D BRONZE ENAMEL", "cat": "QD Enamel", "net": 2012010.04}, {"prodno": "139430", "name": "20LT DECOR DARK GREY PVA", "cat": "PVA Paints", "net": 1996623.07}, {"prodno": "299856", "name": "5L HIGH GLOSS (MQ) BURGANDY", "cat": "Enamel", "net": 1995544.82}, {"prodno": "139416", "name": "20L DECOR CHESTNUT PVA", "cat": "PVA Paints", "net": 1929065.24}, {"prodno": "139417", "name": "20L DECOR KIWI PVA", "cat": "PVA Paints", "net": 1884222.93}, {"prodno": "299871", "name": "5L HIGH GLOSS (M/Q) S/RED", "cat": "Enamel", "net": 1808805.87}, {"prodno": "299832", "name": "5L HIGH GLOSS (MQ) P BROWN", "cat": "Enamel", "net": 1584378.03}, {"prodno": "369875", "name": "5L Q D RED OXIDE PRIMER", "cat": "Primers", "net": 1574755.82}, {"prodno": "139411", "name": "20L DECOR CREAM PVA", "cat": "PVA Paints", "net": 1537382.83}, {"prodno": "7289", "name": "DOZEN 750ML LACQUER THINNERS", "cat": "Accessories", "net": 1496910.21}], "2026": [{"prodno": "QD9822", "name": "5L Q D BRONZE ENAMEL", "cat": "QD Enamel", "net": 1711641.4}, {"prodno": "7298", "name": "5LT THINNERS", "cat": "Accessories", "net": 865663.11}, {"prodno": "299825", "name": "5L HIGH GLOSS (MQ) GREY", "cat": "Enamel", "net": 688943.82}, {"prodno": "299821", "name": "5L HIGH GLOSS (MQ) BLACK", "cat": "Enamel", "net": 657527.56}, {"prodno": "299801", "name": "5L HIGH GLOSS (MQ) WHITE", "cat": "Enamel", "net": 637896.86}, {"prodno": "139401", "name": "20L DECOR WHITE PVA", "cat": "PVA Paints", "net": 522891.93}, {"prodno": "QD9821", "name": "5L Q D BLACK ENAMEL", "cat": "QD Enamel", "net": 426176.37}, {"prodno": "299831", "name": "5L HIGH GLOSS (MQ) G BROWN", "cat": "Enamel", "net": 365360.98}, {"prodno": "299721", "name": "1L HIGH GLOSS (MQ) BLACK", "cat": "Enamel", "net": 358668.07}, {"prodno": "389825", "name": "5L RAINPROOF GREY", "cat": "Waterproofing", "net": 356210.83}, {"prodno": "299856", "name": "5L HIGH GLOSS (MQ) BURGANDY", "cat": "Enamel", "net": 347859.56}, {"prodno": "299871", "name": "5L HIGH GLOSS (M/Q) S/RED", "cat": "Enamel", "net": 327783.95}, {"prodno": "139430", "name": "20LT DECOR DARK GREY PVA", "cat": "PVA Paints", "net": 324604.8}, {"prodno": "7289", "name": "DOZEN 750ML LACQUER THINNERS", "cat": "Accessories", "net": 290650.3}, {"prodno": "369875", "name": "5L Q D RED OXIDE PRIMER", "cat": "Primers", "net": 286145.87}, {"prodno": "139494", "name": "20L DECOR SILVER MIST PVA", "cat": "PVA Paints", "net": 278392.65}, {"prodno": "299811", "name": "5L HIGH GLOSS (MQ) CREAM", "cat": "Enamel", "net": 263370.2}, {"prodno": "QD9722", "name": "1L Q D BRONZE ENAMEL", "cat": "QD Enamel", "net": 259603.48}, {"prodno": "139417", "name": "20L DECOR KIWI PVA", "cat": "PVA Paints", "net": 244833.5}, {"prodno": "139416", "name": "20L DECOR CHESTNUT PVA", "cat": "PVA Paints", "net": 244583.79}]}, "rb_summary": {"above": 17793, "below": 5006, "no_price": 438, "total": 22799, "pct_above": 78.0}, "rb_by_rep": [{"rep": "BV", "name": "Bhadresh Vallabh", "above": 4196, "below": 1404, "pct_above": 74.9}, {"rep": "NP", "name": "Nikhil Panchal", "above": 7861, "below": 2050, "pct_above": 79.3}, {"rep": "AP", "name": "Amit Patel", "above": 3048, "below": 334, "pct_above": 90.1}, {"rep": "AC", "name": "Aboo Cassim", "above": 2111, "below": 1178, "pct_above": 64.2}, {"rep": "BM", "name": "Byron Minnie", "above": 66, "below": 6, "pct_above": 91.7}], "rb_by_cat": [{"cat": "PVA Paints", "above": 2993, "below": 1329, "pct_above": 69.3}, {"cat": "Enamel", "above": 5138, "below": 1326, "pct_above": 79.5}, {"cat": "Accessories", "above": 1030, "below": 417, "pct_above": 71.2}, {"cat": "Waterproofing", "above": 1179, "below": 349, "pct_above": 77.2}, {"cat": "QD Enamel", "above": 2102, "below": 341, "pct_above": 86.0}, {"cat": "General", "above": 657, "below": 327, "pct_above": 66.8}, {"cat": "Putty", "above": 491, "below": 320, "pct_above": 60.5}, {"cat": "Woodcare", "above": 2591, "below": 300, "pct_above": 89.6}, {"cat": "Floor & Roof Paints", "above": 788, "below": 186, "pct_above": 80.9}, {"cat": "Primers", "above": 710, "below": 93, "pct_above": 88.4}, {"cat": "Specialised Coatings", "above": 114, "below": 18, "pct_above": 86.4}], "below_rb_products": [{"prodno": "RGE009", "name": "200mm x 10m Membrane", "cat": "Accessories", "count": 225, "revenue": 66167.0}, {"prodno": "5186", "name": "5KG PUTTY", "cat": "Putty", "count": 97, "revenue": 193983.19}, {"prodno": "299825", "name": "5L HIGH GLOSS (MQ) GREY", "cat": "Enamel", "count": 81, "revenue": 523572.46}, {"prodno": "299801", "name": "5L HIGH GLOSS (MQ) WHITE", "cat": "Enamel", "count": 74, "revenue": 589922.46}, {"prodno": "527972", "name": "24x500GM RED OXIDE", "cat": "General", "count": 71, "revenue": 77550.33}, {"prodno": "299811", "name": "5L HIGH GLOSS (MQ) CREAM", "cat": "Enamel", "count": 71, "revenue": 275467.59}, {"prodno": "389856", "name": "5L RAINPROOF BURGUNDY", "cat": "Waterproofing", "count": 69, "revenue": 185146.0}, {"prodno": "299871", "name": "5L HIGH GLOSS (M/Q) S/RED", "cat": "Enamel", "count": 69, "revenue": 309820.89}, {"prodno": "5184", "name": "10KG PUTTY", "cat": "Putty", "count": 68, "revenue": 91623.19}, {"prodno": "389825", "name": "5L RAINPROOF GREY", "cat": "Waterproofing", "count": 67, "revenue": 203804.0}, {"prodno": "527921", "name": "24x500GM OXIDE BLACK", "cat": "General", "count": 67, "revenue": 66155.04}, {"prodno": "7298", "name": "5LT THINNERS", "cat": "Accessories", "count": 61, "revenue": 406039.42}, {"prodno": "5176", "name": "24X1KG PUTTY", "cat": "Putty", "count": 61, "revenue": 70829.0}, {"prodno": "RGE016", "name": "75mm x 10m Membrane", "cat": "Accessories", "count": 54, "revenue": 2000.0}, {"prodno": "419783", "name": "1L DARK OAK VARNISH", "cat": "Woodcare", "count": 53, "revenue": 148314.0}, {"prodno": "299831", "name": "5L HIGH GLOSS (MQ) G BROWN", "cat": "Enamel", "count": 53, "revenue": 368651.79}, {"prodno": "7289", "name": "DOZEN 750ML LACQUER THINNERS", "cat": "Accessories", "count": 53, "revenue": 134452.76}, {"prodno": "389875", "name": "5L RAINPROOF RED", "cat": "Waterproofing", "count": 51, "revenue": 108727.0}, {"prodno": "299856", "name": "5L HIGH GLOSS (MQ) BURGANDY", "cat": "Enamel", "count": 51, "revenue": 274590.36}, {"prodno": "389821", "name": "5L RAINPROOF BLACK", "cat": "Waterproofing", "count": 49, "revenue": 84510.62}], "no_rb_products": [{"prodno": "HPQD9822", "name": "5LT HYPER STEEL Q.D BRONZE", "cat": "QD Enamel", "revenue": 155500.0}, {"prodno": "M9401", "name": "20L MADALA'S CHOICE WHITE PVA", "cat": "PVA Paints", "revenue": 105200.0}, {"prodno": "HPQD9830", "name": "5LT HYPER STEEL Q.D CHARCOAL", "cat": "QD Enamel", "revenue": 80500.0}, {"prodno": "HP119820", "name": "5LT HYPER STEEL Q.D GRIP COAT BLACK", "cat": "QD Enamel", "revenue": 69612.72}, {"prodno": "HPQD9821", "name": "5LT HYPER STEEL Q.D BLACK", "cat": "QD Enamel", "revenue": 66250.0}, {"prodno": "M9411", "name": "20L MADALA'S CHOICE CREAM PVA", "cat": "PVA Paints", "revenue": 55680.0}, {"prodno": "HP369875", "name": "5LT HYPER STEEL RED OXIDE PRIMER", "cat": "QD Enamel", "revenue": 43964.3}, {"prodno": "HPQD9838", "name": "5LT HYPER STEEL Q.D GREY PRIMER", "cat": "QD Enamel", "revenue": 35000.0}, {"prodno": "HPQD9828", "name": "5L HYPER STEEL Q.D GREY", "cat": "QD Enamel", "revenue": 31250.0}, {"prodno": "HPQD9801", "name": "5LT HYPER STEEL Q.D WHITE", "cat": "QD Enamel", "revenue": 18750.0}, {"prodno": "379921", "name": "200L BLACK WATER BASE OXIDE PRIMER", "cat": "Primers", "revenue": 15318.53}, {"prodno": "HPQD9722", "name": "1LT HYPER STEEL Q.D BRONZE", "cat": "QD Enamel", "revenue": 11700.0}, {"prodno": "HPQD9891", "name": "5LT HYPER STEEL Q.D SILVER", "cat": "QD Enamel", "revenue": 11366.4}, {"prodno": "HPQD9860", "name": "5LT HYPER STEEL Q.D MATT BLACK", "cat": "QD Enamel", "revenue": 11250.0}, {"prodno": "HPQD9832", "name": "5LT HYPER STEEL Q.D PWD BROWN", "cat": "QD Enamel", "revenue": 10750.0}], "available_months": [{"year": 2024, "month": 3}, {"year": 2024, "month": 4}, {"year": 2024, "month": 5}, {"year": 2024, "month": 6}, {"year": 2024, "month": 7}, {"year": 2024, "month": 8}, {"year": 2024, "month": 9}, {"year": 2024, "month": 10}, {"year": 2024, "month": 11}, {"year": 2024, "month": 12}, {"year": 2025, "month": 1}, {"year": 2025, "month": 2}, {"year": 2025, "month": 3}, {"year": 2025, "month": 4}, {"year": 2025, "month": 5}, {"year": 2025, "month": 6}, {"year": 2025, "month": 7}, {"year": 2025, "month": 8}, {"year": 2025, "month": 9}, {"year": 2025, "month": 10}, {"year": 2025, "month": 11}, {"year": 2025, "month": 12}, {"year": 2026, "month": 1}, {"year": 2026, "month": 2}, {"year": 2026, "month": 3}, {"year": 2026, "month": 4}, {"year": 2026, "month": 5}], "partial_months": [{"year": 2026, "month": 5, "through_day": 4}], "target_growth": 1.3};
 
 // ── Chart defaults ────────────────────────────────────────────────────────────
 Chart.defaults.font.family = "'Segoe UI', system-ui, sans-serif";
@@ -902,9 +1489,10 @@ function showTab(id) {
 }
 
 function initChartsFor(id) {
-  if (id === 'yoy')     initYOYCharts();
-  if (id === 'fy2025')  initFY25Charts();
-  if (id === 'monthly') renderMonthlyTab();
+  if (id === 'yoy')      initYOYCharts();
+  if (id === 'fy2025')   initFY25Charts();
+  if (id === 'monthly')  renderMonthlyTab();
+  if (id === 'products') initProductsCharts();
 }
 
 // ── YOY Charts ────────────────────────────────────────────────────────────────
@@ -1095,6 +1683,42 @@ function jumpToMonth(val) {
   const parts = val.split('-');
   curY = parseInt(parts[0]); curM = parseInt(parts[1]);
   renderMonthlyTab();
+}
+
+// ── Products Charts ───────────────────────────────────────────────────────────
+function initProductsCharts() {
+  const labels = ["Enamel", "PVA Paints", "QD Enamel", "Woodcare", "Accessories", "Waterproofing", "Floor & Roof Paints", "Primers", "Putty", "General", "Specialised Coatings"];
+  const values = [6.756, 5.009, 4.46, 1.875, 1.483, 1.145, 0.999, 0.884, 0.602, 0.262, 0.145];
+  const colors = ["#E85D04", "#2EC4B6", "#457B9D", "#2DC653", "#E63946", "#F4A261", "#9B59B6", "#1ABC9C", "#F39C12", "#3498DB", "#E74C3C"];
+
+  new Chart(document.getElementById('cCatDonut'), {
+    type: 'doughnut',
+    data: { labels, datasets: [{ data: values, backgroundColor: colors, borderWidth: 2, borderColor: '#fff', hoverOffset: 8 }] },
+    options: {
+      responsive: true, maintainAspectRatio: false, cutout: '60%',
+      plugins: {
+        legend: { position: 'right', labels: { padding: 12, boxWidth: 14, font: { size: 11 } } },
+        tooltip: { callbacks: { label: c => c.label + ': R' + c.parsed.toFixed(2) + 'M' } }
+      }
+    }
+  });
+
+  new Chart(document.getElementById('cCatBar'), {
+    type: 'bar',
+    data: { labels, datasets: [{ data: values, backgroundColor: colors, borderRadius: 6 }] },
+    options: {
+      indexAxis: 'y',
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: { label: c => 'R' + c.parsed.x.toFixed(2) + 'M' } }
+      },
+      scales: {
+        x: { grid: GRID, ticks: { callback: v => 'R' + v.toFixed(1) + 'M' } },
+        y: { grid: { display: false }, ticks: { font: { size: 11 } } }
+      }
+    }
+  });
 }
 
 // ── Init ──────────────────────────────────────────────────────────────────────
