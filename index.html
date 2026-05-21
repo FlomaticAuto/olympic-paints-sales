@@ -2536,8 +2536,8 @@ footer{text-align:center;padding:24px 40px;font-size:11px;color:var(--color-text
       <p style="font-size:13px;color:var(--muted)">Active months = distinct calendar months with at least one invoice. Accounts shown under their primary rep (most invoice lines in that year). <span id="bp-year-note">Partial years are bucketed by ratio of months bought to months elapsed, so a customer active every month is always classed as top-tier.</span></p>
     </div>
     <div style="display:flex;gap:6px">
-      <button class="bp-ybtn active" onclick="setBPYear('2025',this)">2025 Full Year</button>
-      <button class="bp-ybtn" onclick="setBPYear('2026',this)">2026 YTD</button>
+      <button class="bp-ybtn" onclick="setBPYear('2025',this)">2025 Full Year</button>
+      <button class="bp-ybtn active" onclick="setBPYear('2026',this)">2026 YTD</button>
     </div>
   </div>
 
@@ -4639,7 +4639,7 @@ renderCredits();
 showTab('monthly');
 
 // ── Buying Patterns ───────────────────────────────────────────────────────────
-let bpYear = '2025', bpRep = 'ALL', bpFilter = 'all', bpSort = 'months', bpDir = -1;
+let bpYear = '2026', bpRep = 'ALL', bpFilter = 'all', bpSort = 'months', bpDir = -1;
 let bpChart1 = null, bpChart2 = null;
 const BP_REPS  = ["BV", "NP", "AP", "AC", "BM"];
 const BP_NAMES = {"BV": "Bhadresh Vallabh", "NP": "Nikhil Panchal", "AP": "Amit Patel", "AC": "Aboo Cassim", "BM": "Byron Minnie"};
