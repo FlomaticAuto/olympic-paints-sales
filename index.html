@@ -2764,7 +2764,7 @@ footer{text-align:center;padding:24px 40px;font-size:11px;color:var(--color-text
   <div class="cr-filter-block">
     <div class="cr-filter-row">
       <span class="cr-filter-label">Period</span>
-      <div class="cr-pill-row"><button class="cr-pill cr-pill-period active" data-period="all" onclick="setCrPeriod('all',this)">All Time</button><button class="cr-pill cr-pill-period" data-period="fy:2024" onclick="setCrPeriod('fy:2024',this)">FY2024</button><button class="cr-pill cr-pill-period" data-period="fy:2025" onclick="setCrPeriod('fy:2025',this)">FY2025</button><button class="cr-pill cr-pill-period" data-period="fy:2026" onclick="setCrPeriod('fy:2026',this)">FY2026</button><span class="cr-pill-sep" aria-hidden="true"></span><button class="cr-pill cr-pill-period cr-pill-mo" data-period="mo:2026-01" onclick="setCrPeriod('mo:2026-01',this)">Jan '26</button><button class="cr-pill cr-pill-period cr-pill-mo" data-period="mo:2026-02" onclick="setCrPeriod('mo:2026-02',this)">Feb '26</button><button class="cr-pill cr-pill-period cr-pill-mo" data-period="mo:2026-03" onclick="setCrPeriod('mo:2026-03',this)">Mar '26</button><button class="cr-pill cr-pill-period cr-pill-mo" data-period="mo:2026-04" onclick="setCrPeriod('mo:2026-04',this)">Apr '26</button><button class="cr-pill cr-pill-period cr-pill-mo" data-period="mo:2026-05" onclick="setCrPeriod('mo:2026-05',this)">May '26</button></div>
+      <div class="cr-pill-row"><button class="cr-pill cr-pill-period" data-period="all" onclick="setCrPeriod('all',this)">All Time</button><button class="cr-pill cr-pill-period" data-period="fy:2024" onclick="setCrPeriod('fy:2024',this)">FY2024</button><button class="cr-pill cr-pill-period" data-period="fy:2025" onclick="setCrPeriod('fy:2025',this)">FY2025</button><button class="cr-pill cr-pill-period" data-period="fy:2026" onclick="setCrPeriod('fy:2026',this)">FY2026</button><span class="cr-pill-sep" aria-hidden="true"></span><button class="cr-pill cr-pill-period cr-pill-mo" data-period="mo:2026-01" onclick="setCrPeriod('mo:2026-01',this)">Jan '26</button><button class="cr-pill cr-pill-period cr-pill-mo" data-period="mo:2026-02" onclick="setCrPeriod('mo:2026-02',this)">Feb '26</button><button class="cr-pill cr-pill-period cr-pill-mo" data-period="mo:2026-03" onclick="setCrPeriod('mo:2026-03',this)">Mar '26</button><button class="cr-pill cr-pill-period cr-pill-mo" data-period="mo:2026-04" onclick="setCrPeriod('mo:2026-04',this)">Apr '26</button><button class="cr-pill cr-pill-period cr-pill-mo" data-period="mo:2026-05" onclick="setCrPeriod('mo:2026-05',this)">May '26</button></div>
     </div>
     <div class="cr-filter-row">
       <span class="cr-filter-label">Rep</span>
@@ -4339,7 +4339,23 @@ renderNonStock();
 
 // ── Credits tab ───────────────────────────────────────────────────────────────
 // Two independent filter axes — both apply (AND) to the transaction set.
-let crPeriod = 'all';   // 'all' | 'fy:YYYY' | 'mo:YYYY-MM'
+// Default to current month; fall back to current FY if that month pill isn't rendered yet.
+(function() {
+  var now = new Date();
+  var y = now.getFullYear(), m = now.getMonth() + 1;  // 1-based month
+  // Olympic FY runs Mar–Feb: months 3–12 belong to that calendar year, 1–2 to year-1
+  var fy = (m >= 3) ? y : y - 1;
+  var moKey = 'mo:' + y + '-' + String(m).padStart(2, '0');
+  var fyKey = 'fy:' + fy;
+  // Activate the correct pill — prefer month, fall back to FY
+  var moPill = document.querySelector('.cr-pill-period[data-period="' + moKey + '"]');
+  var fyPill = document.querySelector('.cr-pill-period[data-period="' + fyKey + '"]');
+  document.querySelectorAll('.cr-pill-period').forEach(function(b) { b.classList.remove('active'); });
+  if (moPill) { moPill.classList.add('active'); window._crDefaultPeriod = moKey; }
+  else if (fyPill) { fyPill.classList.add('active'); window._crDefaultPeriod = fyKey; }
+  else { window._crDefaultPeriod = fyKey; }
+})();
+let crPeriod = window._crDefaultPeriod || 'all';
 let crRep    = 'all';   // 'all' | rep code (e.g. 'AP')
 let crChartReason = null, crChartMonthly = null;
 
